@@ -4,9 +4,9 @@
 window.onload = MuCParser;
 
 async function MuCParser(){
-	let utils = new MuCUtils();
-	const response = await fetch('https://raw.githubusercontent.com/FlaringK/MuC-Generator/master/MuC.json');
+	const response = await fetch('https://raw.githubusercontent.com/hiddenkrypt/MuCodeScanner/master/MuCFormat.json');
 	const codeFormat = await response.json();
+	let utils = new MuCUtils( codeFormat );
 		
 		
 	console.log("loaded");

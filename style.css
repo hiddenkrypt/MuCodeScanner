@@ -1,7 +1,14 @@
-#codeInput{
-	width:100%;
-	font-size:2em;
+body{
+	background-color:#a1ffa1;
+	font-size:12px;
+	font-family:courier, monospace;
 }
+
+#notices{
+	margin:2em;
+	text-align:right;
+}
+
 #inputContainer{
 	padding:2em;
 	border-radius:1em;
@@ -11,16 +18,20 @@
 	margin-left:auto;
 	margin-right:auto;
 }
-body{
-	background-color:#a1ffa1;
-	font-Size:12px
+#codeInput{
+	width:100%;
+	font-size:2em;
 }
 #parsingline{
 	display:none;
 }
+
+
 #outputContainer{
 	display:flex;
 	gap:1em;
+  flex-wrap: wrap;
+	margin:2em;
 }
 .output{
 	font-size:2em;
@@ -28,26 +39,47 @@ body{
 	border: 1px solid black;
 	background-color:#efefef;
 	width:fit-content;
-	padding:1em;
+	padding-right:1em;
+	padding-left:1em;
 	
 }
-
-#notices{
-	margin:2em;
+.hintblock{
+	font-size:.5em;
+	width:1em;
+	height:1em;
+  line-height: 1em;
+	border:1px solid #929292;
+	color:#929292;
+	border-radius:.1em;
+	display:inline-block;
+	text-align:center;
+	vertical-align:middle;
+	margin-left:.5em;
+	margin-bottom:1.5em;
+	
 }
-.notice{
-	text-align:right;
+.hintblock .tooltip {
+  visibility: hidden;
+  width: 30%;
+  background-color: #d2d2d2;
+  color: #000;
+  text-align: center;
+  padding: 1em;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+}
+.hintblock:hover .tooltip {
+  visibility: visible;
 }
 #footer{	
-	bottom:0;
-  position:absolute;
 	width:100%;
 	padding: 0;
 	margin: 0;
 	border:0;
 }
 #footerBox{
-	font-size:1em;
+	font-size:1.5em;
 	padding:.5em;
 	border-radius:.5em;
 	border: 1px solid black;
