@@ -1,15 +1,44 @@
 #codeInput{
 	width:100%;
+	font-size:2em;
 }
 #inputContainer{
 	padding:2em;
-	border-radius:2em;
+	border-radius:1em;
 	border: 1px solid black;
-	background-color:#efefef
+	background-color:#efefef;
+	width:50%;
+	margin-left:auto;
+	margin-right:auto;
 }
 body{
-	background-color:#a1ffa1
+	background-color:#a1ffa1;
+	font-Size:12px
 }
-#outputContainer{
+#outputContainer,#parsingline{
 	display:none;
+}
+#notices{
+	margin:2em;
+}
+.notice{
+	text-align:right;
+}
+#footer{	
+	bottom:0;
+  position:absolute;
+	width:100%;
+	padding: 0;
+	margin: 0;
+	border:0;
+}
+#footerBox{
+	font-size:2em;
+	padding:.5em;
+	border-radius:.5em;
+	border: 1px solid black;
+	background-color:#efefef;
+	width:fit-content;
+	margin-left:auto;
+	margin-right:auto;
 }
