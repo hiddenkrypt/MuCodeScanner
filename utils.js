@@ -42,7 +42,8 @@ function MuCUtils( codeFormat ){
 		function createOutput(category){
 			let out = document.createElement("div");
 			out.className = "output";
-			out.id = category.format+"Container";
+			out.id = category.format+"container";
+			//out.style.display = "none";
 			let title = document.createElement("h3");
 			title.id = category.format+"title";
 			title.innerText = category.name;
