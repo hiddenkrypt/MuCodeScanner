@@ -1,9 +1,12 @@
 function MuCUtils( codeFormat ){	
 	
 	this.getOption = function getOption( format, tag ){
-		if(tag.match(/".*"/)) {
+		if(tag.match(/^".*"$/)) {
 			return tag.replace(/"/g,"");
-		} 
+		}
+		if(tag.match(/".*"/)) {
+		return this.getOption( format, tag.replace(/".*"/g, "")) + " (" + tag.match(/".*"/g).join(",").replace(/"/g, "") + ")";
+		}
 		let found = format.options.find(e=>e.tag == tag);
 		if( !found ){
 			this.error("Unknown Option: " + tag);

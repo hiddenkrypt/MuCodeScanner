@@ -4,7 +4,7 @@
 window.onload = MuCParser;
 
 async function MuCParser() {
-	const response = await fetch('https://raw.githubusercontent.com/hiddenkrypt/MuCodeScanner/master/MuCFormat.json');
+	const response = await fetch('https://raw.githubusercontent.com/hiddenkrypt/MuCodeScanner/master/MuCFormat.json', {cache: "no-store"});
 	const codeFormat = await response.json();
 	let Utils = new MuCUtils( codeFormat );
 		
@@ -84,8 +84,7 @@ async function MuCParser() {
 			return;
 		}
 		let remainingGenderTags = tagString.split(";")[1].split("/");
-		content.innerHTML += "<br>Some members of this system are " + remainingGenderTags.map(getGender).join(", ");
-		//Pick up tomorrow from here
+		content.innerHTML += "<br>Members of this system include:<ul><li>" + remainingGenderTags.map(getGender).join("<li>") + "</ul>";
 	}
 
 	
@@ -94,7 +93,6 @@ async function MuCParser() {
 		let content = document.getElementById("S.content");
 		let speciesFormat = getFormat("S.");
 		function getSpecies( speciesTag ) {
-			console.log("looking for:"+speciesTag);
 			if( speciesTag.includes( "+" ) ) {	
 				return Utils.getMod( speciesFormat, "+" ) + getSpecies( speciesTag.replace(/\+/g, "")  );
 			}
@@ -107,14 +105,21 @@ async function MuCParser() {
 				}
 				return "A cross between: " + speciesTag.split("&").map(getSpecies).join(", ");
 			}
-			if( speciesTag.includes( "?" ) ) {}
-			if( speciesTag.includes( "^" ) ) {}
+			if( speciesTag.includes( "?" ) ) {
+				if( speciesTag == "?" ) {
+					return "Unknown";
+				}
+				return getSpecies( speciesTag.replace(/\?/g, "") ) +  Utils.getMod( speciesFormat, "?" );
+			}
+			if( speciesTag.includes( "^" ) ) {
+				return getSpecies( speciesTag.replace(/\^/g, "") ) +  Utils.getMod( speciesFormat, "^" );
+			}
 			if( speciesTag.includes( "~" ) ) {
-				return "A Shapeshifter with " + speciesTag.split("~").map(getSpecies).join(", ") + " forms.";
+				return "A Shapeshifter with " + speciesTag.split("~").map(getSpecies).join(", ") + " forms";
 			}		
 			return Utils.getOption( speciesFormat, speciesTag );
 		}
 		let allSpecies = tagString.split("/").map(getSpecies);
-		console.log( allSpecies );
+		content.innerHTML = "This system's members include:<ul><li>"+ allSpecies.join("<li>") + "</ul>";
 	}
 }
