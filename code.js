@@ -3,7 +3,7 @@
 
 window.onload = MuCParser;
 
-async function MuCParser(){
+async function MuCParser() {
 	const response = await fetch('https://raw.githubusercontent.com/hiddenkrypt/MuCodeScanner/master/MuCFormat.json');
 	const codeFormat = await response.json();
 	let utils = new MuCUtils( codeFormat );
@@ -12,29 +12,32 @@ async function MuCParser(){
 	console.log("loaded");
 	let input = document.getElementById("codeInput");
 	
-	input.addEventListener("input", parseCode);
-	if(input.value){ parseCode()}
-	function parseCode(){
+	input.addEventListener( "input", parseCode );
+	if( input.value ){ 
+		parseCode() 
+	}
+	function parseCode() {
 		utils.reset();
 		code = input.value.split(" ");
-		if(code[0] != "MuC"){
+		if( code[0] != "MuC" ) {
 			utils.error("malformed or missing MuC Header");
 			return
 		}
-		console.log(code);
-		code.forEach((e,a,i)=>{
+		code.forEach( (e,a,i) => {
 			//MuC N---! [f] S.H A(b---! r---!) Os We Cc-- I--- OF--- Ppsi Ff T+++ Xg(g) Jpa Dv R--- C--- S---! MF---
-			if(e.substr(0,1) == "N"){
-				parseNumbers(e.substr(1));
-			} else if(e.substr(0,1) == "["){
-				parseGenders(e.replace(/[\[\]]/g, ""));
+			if( e.substr(0,1) == "N" ) {
+				parseNumbers( e.substr(1) );
+			} else if( e.substr(0,1) == "[") {
+				parseGenders( e.replace(/[\[\]]/g, "") );
+			} else if( e.substr(0,2) == "S.") {
+				parseSpecies( e.substr(0,2) );
 			}
 		});
 	}
-	function getFormat(by){
+	function getFormat(by) {
 		return codeFormat.find(e=>e.format == by);
 	}
-	function parseNumbers(tagString){	
+	function parseNumbers(tagString) {	
 		let numberFormat = getFormat("N");
 		let cleanString = tagString.replace(/[#^]/g,'').replace(/".*"/g,'');
 		let number = numberFormat.options.find(e=>e.tag == cleanString);
@@ -84,8 +87,12 @@ async function MuCParser(){
 			return;
 		}
 		let remainingGenderTags = tagString.split(";")[1].split("/");
-		console.log(remainingGenderTags);
-		remainingGenderTags.map(getGender).forEach(e=>console.log(e));
+		content.innerHTML += "<br>Some members of this system are " + remainingGenderTags.map(getGender).join(", ");
 		//Pick up tomorrow from here
 	}
+	function parseGenders( tagString ) {
+	let content = document.getElementById("S.content");
+	let speciesFormat = getFormat("S.");
+	function getSpecies(speciesTag){}
+			
 }

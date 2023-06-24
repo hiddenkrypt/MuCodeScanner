@@ -28,8 +28,8 @@
     "format": "[",
     "desc": "Gender can be a complicated subject for multiples. This tag is to denote the gender of the body and can be used to also specify genders within the system using a distribution tag (body gender, semi-colon, system genders separated by backslashes).",
     "options": [
-      { "tag": "?", "desc": "Unknown, don't know." },
-      { "tag": "*", "desc": "Varies, changes (wildcard)." },
+      { "tag": "?", "desc": "Unknown or don't know" },
+      { "tag": "*", "desc": "Varies or changes (wildcard)" },
       { "tag": "f", "desc": "Female" },
       { "tag": "m", "desc": "Male" },
       { "tag": "n", "desc": "Neuter" },
@@ -44,7 +44,7 @@
   },
   {
     "name": "Species",
-    "format": "S",
+    "format": "S.",
     "desc": "What species make up your system? This tag is probably the longest in the Code, for most. Divide different species in your system with a backslash.",
     "options": [
       {
