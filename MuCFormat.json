@@ -2,8 +2,9 @@
   {
     "format": "N",
     "name": "Number",
-    "desc": "The number of (known) people who make up your system. This is not necessarily the number of people who use the body; larger-population groups usually have a lot of people who never take the body, and a smaller subgroup of frontrunners.",
+    "desc": "The number of (known) people who make up this system. This is not necessarily the number of people who use the body; larger-population groups usually have a lot of people who never take the body, and a smaller subgroup of frontrunners.",
     "options": [
+      { "tag": "*", "desc": "Varies, changes (wildcard)." },
       { "tag": "---!", "desc": "Huh? There's only one (1) to this body!" },
       { "tag": "---", "desc": "Two (2) to Three (3)" },
       { "tag": "--", "desc": "Four (4) to Ten (10)" },
@@ -18,7 +19,7 @@
       { "tag": "?", "desc": "Darned if we know!" }
     ],
     "mods": [
-      { "tag": "#", "desc": "Most of us don't use the body" },
+      { "tag": "#", "desc": "Most of us don't use the body." },
       { "tag": "^", "desc": "Everyone front-runs. Given enough time with us, you'll see everybody." }
     ]
   },
@@ -27,6 +28,8 @@
     "format": "[",
     "desc": "Gender can be a complicated subject for multiples. This tag is to denote the gender of the body and can be used to also specify genders within the system using a distribution tag (body gender, semi-colon, system genders separated by backslashes).",
     "options": [
+      { "tag": "?", "desc": "Unknown, don't know." },
+      { "tag": "*", "desc": "Varies, changes (wildcard)." },
       { "tag": "f", "desc": "Female" },
       { "tag": "m", "desc": "Male" },
       { "tag": "n", "desc": "Neuter" },

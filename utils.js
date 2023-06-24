@@ -1,7 +1,20 @@
 function MuCUtils( codeFormat ){
+	this.error = function( message ){
+		let errorOutput = document.getElementById("parsingline");
+		errorOutput.classList.add("error");
+		errorOutput.innerHTML += "<br>"+message;
+	};
+	
 	this.reset = function(){
 		let output = document.getElementById("outputContainer")
 		output.innerHTML = "";
+		
+		let errorOutput = document.getElementById("parsingline");
+		if(errorOutput.classList.contains("error")){
+			errorOutput.classList.remove("error");	
+			errorOutput.innerText = "";			
+		}
+		
 		function createOutput(category){
 			let out = document.createElement("div");
 			out.className = "output";
@@ -13,7 +26,6 @@ function MuCUtils( codeFormat ){
 			hintblock.id = category.format+"hintblock";
 			hintblock.className= "hintblock";
 			hintblock.innerText = "?";
-			
 			let tooltip = document.createElement("span");
 			tooltip.className= "tooltip";
 			tooltip.innerText = category.desc;
@@ -29,5 +41,5 @@ function MuCUtils( codeFormat ){
 			output.appendChild(out);
 		}
 		codeFormat.forEach(createOutput);
-	}
+	};
 }

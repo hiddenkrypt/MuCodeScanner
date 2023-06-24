@@ -10,7 +10,6 @@ async function MuCParser(){
 		
 		
 	console.log("loaded");
-	console.log(codeFormat);
 	let input = document.getElementById("codeInput");
 	
 	input.addEventListener("input", parseCode);
@@ -19,26 +18,74 @@ async function MuCParser(){
 		utils.reset();
 		code = input.value.split(" ");
 		if(code[0] != "MuC"){
-			console.log("malformed code");
-			return;
+			utils.error("malformed or missing MuC Header");
+			return
 		}
 		console.log(code);
 		code.forEach((e,a,i)=>{
 			//MuC N---! [f] S.H A(b---! r---!) Os We Cc-- I--- OF--- Ppsi Ff T+++ Xg(g) Jpa Dv R--- C--- S---! MF---
-	
-			if(e.substr(0,1 == "N")){
+			if(e.substr(0,1) == "N"){
 				parseNumbers(e.substr(1));
+			} else if(e.substr(0,1) == "["){
+				parseGenders(e.replace(/[\[\]]/g, ""));
 			}
 		});
 	}
 	function getFormat(by){
-		return codeFormat.find(e=>{
-			e.tag = by+tag;
-		});
+		return codeFormat.find(e=>e.format == by);
 	}
 	function parseNumbers(tagString){	
-		let numbersOut = document.getElementById("numberContainer");
 		let numberFormat = getFormat("N");
-		numbersOut
+		let cleanString = tagString.replace(/[#^]/g,'').replace(/".*"/g,'');
+		let number = numberFormat.options.find(e=>e.tag == cleanString);
+		if( !number ){
+			utils.error("Malformed Number Field");
+			return;
+			
+		}
+		let content = document.getElementById( "Ncontent" );
+		content.innerHTML = number.desc;
+		if( tagString.includes( "#" ) ) {
+			content.innerHTML += "<br>("
+			content.innerHTML += numberFormat.mods.find(e=>e.tag == "#").desc;
+			content.innerHTML += ")";
+		}
+		if( tagString.includes( "^" ) ) {
+			content.innerHTML += "<br>(";
+			content.innerHTML += numberFormat.mods.find(e=>e.tag == "^").desc;
+			content.innerHTML += ")";
+		}
+		if( tagString.includes( '"' ) ) {
+			content.innerHTML += "<br>(";
+			content.innerHTML += tagString.match(/".*"/)[0].replace(/"/g,"");
+			content.innerHTML += ")";
+		}
+	}
+	function parseGenders( tagString ) {
+		let content = document.getElementById("[content");
+		let genderFormat = getFormat("[");
+		function getGender(gender){
+			
+			if(gender.match(/".*"/)) {
+				return gender.replace(/"/g,"");
+			} else {
+				let found = genderFormat.options.find(e=>e.tag == gender);
+				if( !found ){
+					utils.error("Malformed Gender Field");
+				}
+				return found.desc
+			}
+		}
+		let firstGenderTag = tagString.split(";")[0];
+		let firstGender = getGender(firstGenderTag);
+		
+		content.innerHTML = "This system idenfies their body as " + firstGender;
+		if(!tagString.split(";")[1]){
+			return;
+		}
+		let remainingGenderTags = tagString.split(";")[1].split("/");
+		console.log(remainingGenderTags);
+		remainingGenderTags.map(getGender).forEach(e=>console.log(e));
+		//Pick up tomorrow from here
 	}
 }
