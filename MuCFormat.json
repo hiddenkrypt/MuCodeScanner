@@ -720,12 +720,13 @@
     "name": "Origins",
     "desc": "How did the people of your system come to share the body?",
     "options": [
-      { "tag": "s", "desc": "Splits. " },
-      { "tag": "w", "desc": "Walk-ins. " },
-      { "tag": "r", "desc": "Reincarnation. " },
-      { "tag": "c", "desc": "Channeled. " },
-      { "tag": "i", "desc": "Interface (body is an interface between two or more worlds, gateway system). " },
-      { "tag": "n", "desc": "Natural (just made that way!). " }
+      { "tag": "s", "desc": "Splits" },
+      { "tag": "w", "desc": "Walk-ins" },
+      { "tag": "r", "desc": "Reincarnation" },
+      { "tag": "c", "desc": "Channeled" },
+      { "tag": "i", "desc": "Interface (body is an interface between two or more worlds, gateway system)" },
+      { "tag": "n", "desc": "Natural (just made that way!)" }
+      { "tag": "?", "desc": "Unknown" }
     ],
     "format": "O"
   },

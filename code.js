@@ -35,7 +35,9 @@ async function MuCParser() {
 			} else if( e.substr(0,1) == "A") {
 				parseAge( (e+"|"+code[i+1]).substr(1).replace(/[\(\)]/g, "") );
 				i++;
-			} else if( e.substr(0,1) == "O") {
+			} else if( e.substr(0,1) == "O" && e.substr(0,2) != "OF") {
+				console.log(e.substr(0,1));
+				console.log(e.substr(1,1));
 				parseOrigins( e.substr(1) );
 			} else {
 				//Utils.error("Unknown or unimplemented tag: "+e); 
@@ -156,6 +158,13 @@ async function MuCParser() {
 	}
 	
 	function parseOrigins( originString ){
+		let content = document.getElementById("Ocontent");
+		let originsFormat = getFormat("O");
+		console.log(originString);
+		let origins = originString.split("/").map(e=> Utils.getOption( originsFormat, e ));
+		console.log(origins);
+		content.innerHTML = "The origins of this systems members include:<ul><li>"+ origins.join("<li>") + "</ul>";
+		document.getElementById("Ocontainer").style.display = "block";
 		
 	}
 }
