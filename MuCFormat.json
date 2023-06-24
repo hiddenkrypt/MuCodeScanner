@@ -725,7 +725,7 @@
       { "tag": "r", "desc": "Reincarnation" },
       { "tag": "c", "desc": "Channeled" },
       { "tag": "i", "desc": "Interface (body is an interface between two or more worlds, gateway system)" },
-      { "tag": "n", "desc": "Natural (just made that way!)" }
+      { "tag": "n", "desc": "Natural (just made that way!)" },
       { "tag": "?", "desc": "Unknown" }
     ],
     "format": "O"
