@@ -1,0 +1,1394 @@
+[
+  {
+    "format": "N",
+    "name": "Number",
+    "desc": "The number of (known) people who make up your system. This is not necessarily the number of people who use the body; larger-population groups usually have a lot of people who never take the body, and a smaller subgroup of frontrunners.",
+    "options": [
+      { "tag": "---!", "desc": "Huh? There's only one (1) to this body!" },
+      { "tag": "---", "desc": "Two (2) to Three (3)" },
+      { "tag": "--", "desc": "Four (4) to Ten (10)" },
+      { "tag": "-", "desc": "Eleven (11) to Twenty (20)" },
+      { "tag": "", "desc": "Twentyone (21) to Fifty (50)" },
+      { "tag": "+", "desc": "Fiftyone (51) to Sixty (60)" },
+      { "tag": "++", "desc": "Sixtyone (61) to Eighty (80)" },
+      { "tag": "+++", "desc": "Eightyone (81) to One Hundred (100)" },
+      { "tag": "++++", "desc": "One Hundred (100) to One Thousand (1,000)" },
+      { "tag": "++++!", "desc": "Over One Thousand (1,000+)" },
+      { "tag": "~", "desc": "Not one, not many -- mid-continuum." },
+      { "tag": "?", "desc": "Darned if we know!" }
+    ],
+    "mods": [
+      { "tag": "#", "desc": "Most of us don't use the body" },
+      { "tag": "^", "desc": "Everyone front-runs. Given enough time with us, you'll see everybody." }
+    ]
+  },
+  {
+    "name": "Gender",
+    "format": "[",
+    "desc": "Gender can be a complicated subject for multiples. This tag is to denote the gender of the body and can be used to also specify genders within the system using a distribution tag (body gender, semi-colon, system genders separated by backslashes).",
+    "options": [
+      { "tag": "f", "desc": "Female" },
+      { "tag": "m", "desc": "Male" },
+      { "tag": "n", "desc": "Neuter" },
+      { "tag": "h", "desc": "Hermaphrodite" },
+      { "tag": "a", "desc": "Androgynous" },
+      { "tag": "b", "desc": "Bigendered" },
+      { "tag": "t", "desc": "Third-Gender" },
+      { "tag": "m2f", "desc": "Transgender, bio-male to female" },
+      { "tag": "f2m", "desc": "Transgender, bio-female to male" },
+      { "tag": "o", "desc": "Other" }
+    ]
+  },
+  {
+    "name": "Species",
+    "format": "S",
+    "desc": "What species make up your system? This tag is probably the longest in the Code, for most. Divide different species in your system with a backslash.",
+    "options": [
+      {
+        "tag":"H",
+        "desc":"Human or humanoid, Earth-origin"
+      },
+      {
+        "tag":"Hg",
+        "desc":"Giant"
+      },
+      {
+        "tag":"Hf",
+        "desc":"Fairy"
+      },
+      {
+        "tag":"He",
+        "desc":"Elf"
+      },
+      {
+        "tag":"Hd",
+        "desc":"Dwarf"
+      },
+      {
+        "tag":"Ht",
+        "desc":"Troll"
+      },
+      {
+        "tag":"Hm",
+        "desc":"Mermaid/man"
+      },
+      {
+        "tag":"U",
+        "desc":"Undead"
+      },
+      {
+        "tag":"Uv",
+        "desc":"Vampire"
+      },
+      {
+        "tag":"Ug",
+        "desc":"Ghoul"
+      },
+      {
+        "tag":"Uz",
+        "desc":"Zombie"
+      },
+      {
+        "tag":"S",
+        "desc":"Spiritual"
+      },
+      {
+        "tag":"Sa",
+        "desc":"Angel"
+      },
+      {
+        "tag":"Sg",
+        "desc":"God/Goddess"
+      },
+      {
+        "tag":"Sh",
+        "desc":"Ghost"
+      },
+      {
+        "tag":"Sp",
+        "desc":"Poltergeist"
+      },
+      {
+        "tag":"Sd",
+        "desc":"Demon"
+      },
+      {
+        "tag":"Sv",
+        "desc":"Devil"
+      },
+      {
+        "tag":"M",
+        "desc":"Mammal"
+      },
+      {
+        "tag":"Mc",
+        "desc":"Canine"
+      },
+      {
+        "tag":"Mcw",
+        "desc":"Wolf"
+      },
+      {
+        "tag":"Mcd",
+        "desc":"Dog"
+      },
+      {
+        "tag":"Mcf",
+        "desc":"Fox"
+      },
+      {
+        "tag":"Mcc",
+        "desc":"Coyote"
+      },
+      {
+        "tag":"Mf",
+        "desc":"Feline"
+      },
+      {
+        "tag":"Mfc",
+        "desc":"Cougar"
+      },
+      {
+        "tag":"Mfl",
+        "desc":"Lion"
+      },
+      {
+        "tag":"Mft",
+        "desc":"Tiger"
+      },
+      {
+        "tag":"Mfx",
+        "desc":"Lynx"
+      },
+      {
+        "tag":"Mfp",
+        "desc":"Leopard"
+      },
+      {
+        "tag":"Mfo",
+        "desc":"Ocelot"
+      },
+      {
+        "tag":"Mfj",
+        "desc":"Jaguar"
+      },
+      {
+        "tag":"Mfh",
+        "desc":"House Cat"
+      },
+      {
+        "tag":"Me",
+        "desc":"Equine"
+      },
+      {
+        "tag":"Meh",
+        "desc":"Horse"
+      },
+      {
+        "tag":"Med",
+        "desc":"Donkey/Burro"
+      },
+      {
+        "tag":"Mem",
+        "desc":"Mule"
+      },
+      {
+        "tag":"Mez",
+        "desc":"Zebra"
+      },
+      {
+        "tag":"Mb",
+        "desc":"Bat"
+      },
+      {
+        "tag":"Mu",
+        "desc":"Bear"
+      },
+      {
+        "tag":"Mp",
+        "desc":"Primate"
+      },
+      {
+        "tag":"Mpa",
+        "desc":"Ape"
+      },
+      {
+        "tag":"Mpm",
+        "desc":"Monkey"
+      },
+      {
+        "tag":"Mm",
+        "desc":"Mustelid"
+      },
+      {
+        "tag":"Mmf",
+        "desc":"Ferret"
+      },
+      {
+        "tag":"Mms",
+        "desc":"Skunk"
+      },
+      {
+        "tag":"Mmb",
+        "desc":"Badger"
+      },
+      {
+        "tag":"Mmm",
+        "desc":"Mink"
+      },
+      {
+        "tag":"Mmp",
+        "desc":"Pine Marten"
+      },
+      {
+        "tag":"Mr",
+        "desc":"Rodent"
+      },
+      {
+        "tag":"Mrr",
+        "desc":"Rat"
+      },
+      {
+        "tag":"Mrm",
+        "desc":"Mouse"
+      },
+      {
+        "tag":"Mrg",
+        "desc":"Gerbil"
+      },
+      {
+        "tag":"Mrh",
+        "desc":"Hamster"
+      },
+      {
+        "tag":"Mrs",
+        "desc":"Squirrel"
+      },
+      {
+        "tag":"Mrc",
+        "desc":"Capybura"
+      },
+      {
+        "tag":"Mw",
+        "desc":"Whale"
+      },
+      {
+        "tag":"Md",
+        "desc":"Dolphin"
+      },
+      {
+        "tag":"R",
+        "desc":"Reptile"
+      },
+      {
+        "tag":"Rg",
+        "desc":"Alligator"
+      },
+      {
+        "tag":"Rc",
+        "desc":"Crocodile"
+      },
+      {
+        "tag":"Rl",
+        "desc":"Lizard"
+      },
+      {
+        "tag":"Rlc",
+        "desc":"Chameleon"
+      },
+      {
+        "tag":"Rls",
+        "desc":"Skink"
+      },
+      {
+        "tag":"Rlk",
+        "desc":"Komodo Dragon"
+      },
+      {
+        "tag":"Rlm",
+        "desc":"Monitor"
+      },
+      {
+        "tag":"Rlg",
+        "desc":"Gecko"
+      },
+      {
+        "tag":"Rs",
+        "desc":"Snake"
+      },
+      {
+        "tag":"Rsc",
+        "desc":"Cobra"
+      },
+      {
+        "tag":"Rsp",
+        "desc":"Python"
+      },
+      {
+        "tag":"Rsb",
+        "desc":"Boa Constrictor"
+      },
+      {
+        "tag":"Rsg",
+        "desc":"Garter Snake"
+      },
+      {
+        "tag":"Rsr",
+        "desc":"Rattlesnake"
+      },
+      {
+        "tag":"Rt",
+        "desc":"Turtle, Terrapin, Tortoise"
+      },
+      {
+        "tag":"F",
+        "desc":"Fish"
+      },
+      {
+        "tag":"K",
+        "desc":"Mollusk"
+      },
+      {
+        "tag":"D",
+        "desc":"Dinosaur/ Prehistoric"
+      },
+      {
+        "tag":"Ds",
+        "desc":"Sauropod"
+      },
+      {
+        "tag":"Dr",
+        "desc":"Tyrannasaur"
+      },
+      {
+        "tag":"Dv",
+        "desc":"Velociraptor"
+      },
+      {
+        "tag":"Dt",
+        "desc":"Triceretops"
+      },
+      {
+        "tag":"Dg",
+        "desc":"Stegosaurus"
+      },
+      {
+        "tag":"Du",
+        "desc":"Utahraptor"
+      },
+      {
+        "tag":"Dd",
+        "desc":"Deinonychus"
+      },
+      {
+        "tag":"Dm",
+        "desc":"Microraptor"
+      },
+      {
+        "tag":"A",
+        "desc":"Alien"
+      },
+      {
+        "tag":"Am",
+        "desc":"Martian"
+      },
+      {
+        "tag":"Av",
+        "desc":"Venusian"
+      },
+      {
+        "tag":"Akr ",
+        "desc":"Kryptonian"
+      },
+      {
+        "tag":"Ag",
+        "desc":"Grey or \"flying saucer\" type alien"
+      },
+      {
+        "tag":"Av",
+        "desc":"Vulcan"
+      },
+      {
+        "tag":"Akl ",
+        "desc":"Klingon"
+      },
+      {
+        "tag":"Ar",
+        "desc":"Romulan"
+      },
+      {
+        "tag":"Ab",
+        "desc":"Bajoran"
+      },
+      {
+        "tag":"Aw",
+        "desc":"Wookie"
+      },
+      {
+        "tag":"Ae",
+        "desc":"Ewok"
+      },
+      {
+        "tag":"Amb ",
+        "desc":"Minbari"
+      },
+      {
+        "tag":"Age ",
+        "desc":"Gethenian"
+      },
+      {
+        "tag":"Az",
+        "desc":"Zhaan (Green-sky; Kindar or Erdling)"
+      },
+      {
+        "tag":"B",
+        "desc":"Bird"
+      },
+      {
+        "tag":"Bc",
+        "desc":"Corvid\nS.Bcc  Crow\nS.Bcr  Raven"
+      },
+      {
+        "tag":"Bcc",
+        "desc":"Crow"
+      },
+      {
+        "tag":"Bcr",
+        "desc":"Raven"
+      },
+      {
+        "tag":"Bd",
+        "desc":"Dove"
+      },
+      {
+        "tag":"Bdk",
+        "desc":"Duck"
+      },
+      {
+        "tag":"Bf",
+        "desc":"Finch"
+      },
+      {
+        "tag":"Bg",
+        "desc":"Goose"
+      },
+      {
+        "tag":"Bh",
+        "desc":"Hummingbird"
+      },
+      {
+        "tag":"Bpr",
+        "desc":"Parrot / psittaform"
+      },
+      {
+        "tag":"Bprg",
+        "desc":"African Grey"
+      },
+      {
+        "tag":"Bprm",
+        "desc":"Macaw"
+      },
+      {
+        "tag":"Bpra",
+        "desc":"Amazon"
+      },
+      {
+        "tag":"Bpre",
+        "desc":"Eclectus"
+      },
+      {
+        "tag":"Bprc",
+        "desc":"Cockatoo"
+      },
+      {
+        "tag":"Bprt",
+        "desc":"Cockatiel"
+      },
+      {
+        "tag":"Bprb",
+        "desc":"Budgerigar (Parakeet)"
+      },
+      {
+        "tag":"Bp",
+        "desc":"Pigeon"
+      },
+      {
+        "tag":"Bph",
+        "desc":"Phasianidae"
+      },
+      {
+        "tag":"Bphr",
+        "desc":"Partridge"
+      },
+      {
+        "tag":"Bphc",
+        "desc":"Peafowl/ Peacocks"
+      },
+      {
+        "tag":"Bphp",
+        "desc":"Pheasant"
+      },
+      {
+        "tag":"Bphq",
+        "desc":"Quail"
+      },
+      {
+        "tag":"Br",
+        "desc":"Raptor"
+      },
+      {
+        "tag":"Brh",
+        "desc":"Hawk"
+      },
+      {
+        "tag":"Bre",
+        "desc":"Eagle"
+      },
+      {
+        "tag":"Brv",
+        "desc":"Vulture"
+      },
+      {
+        "tag":"Bro",
+        "desc":"Osprey"
+      },
+      {
+        "tag":"Brk",
+        "desc":"Kestrel"
+      },
+      {
+        "tag":"Brw",
+        "desc":"Owl"
+      },
+      {
+        "tag":"Brf",
+        "desc":"Falcon"
+      },
+      {
+        "tag":"Bo",
+        "desc":"Robin"
+      },
+      {
+        "tag":"Bs",
+        "desc":"Swan"
+      },
+      {
+        "tag":"P",
+        "desc":"Amphibian"
+      },
+      {
+        "tag":"Pf",
+        "desc":"Frog"
+      },
+      {
+        "tag":"Pt",
+        "desc":"Toad"
+      },
+      {
+        "tag":"Pn",
+        "desc":"Newt"
+      },
+      {
+        "tag":"Ps",
+        "desc":"Salamander"
+      },
+      {
+        "tag":"L",
+        "desc":"Legendary or Mythic"
+      },
+      {
+        "tag":"Ld",
+        "desc":"Dragon"
+      },
+      {
+        "tag":"Ldw",
+        "desc":"European / Western"
+      },
+      {
+        "tag":"Lde",
+        "desc":"Asian / Eastern"
+      },
+      {
+        "tag":"Ldy",
+        "desc":"Wyvern"
+      },
+      {
+        "tag":"Lds",
+        "desc":"Serpentine"
+      },
+      {
+        "tag":"Lc",
+        "desc":"Centaur"
+      },
+      {
+        "tag":"Lf",
+        "desc":"Faun"
+      },
+      {
+        "tag":"Lg",
+        "desc":"Gargoyle"
+      },
+      {
+        "tag":"Lo",
+        "desc":"Golem"
+      },
+      {
+        "tag":"Lr",
+        "desc":"Gremlin"
+      },
+      {
+        "tag":"Lf",
+        "desc":"Gryphon/Griffin"
+      },
+      {
+        "tag":"Lh",
+        "desc":"Hellhound"
+      },
+      {
+        "tag":"Ln",
+        "desc":"Nymph"
+      },
+      {
+        "tag":"Lsp ",
+        "desc":"Sprite"
+      },
+      {
+        "tag":"Ls",
+        "desc":"Satyr"
+      },
+      {
+        "tag":"Lu",
+        "desc":"Unicorn"
+      },
+      {
+        "tag":"N",
+        "desc":"Plant"
+      },
+      {
+        "tag":"~",
+        "desc":"Shapeshifter (Any form)"
+      }
+    ],
+    "mods": [
+      {
+        "tag":"+",
+        "desc":"More than one of previous species."
+      },
+      {
+        "tag":"*",
+        "desc":"Anthro version of previous species (a furry)."
+      },
+      {
+        "tag":"&",
+        "desc":"Cross between two species."
+      },
+      {
+        "tag":"?",
+        "desc":"Unknown."
+      },
+      {
+        "tag":"^",
+        "desc":"Non-sentient (intelligent, reasoning, sapient)."
+      },
+      {
+        "tag":"~",
+        "desc":"Used as a modifier to denote a shapeshifter with limited forms (Combining this and the next species. Must be used as the last modifier)."
+      }
+    ]
+  },
+  {
+    "name": "Age",
+    "desc": "This uses a distribution tag to show both body age and the age of the people in your system (b for body age, and r with a backslash for system age range).",
+    "options": [
+      { "tag": "---!", "desc": "Just a wee bairn." },
+      { "tag": "---", "desc": "Confused adolescent." },
+      { "tag": "--", "desc": "Rebellious teenager stage." },
+      { "tag": "-", "desc": "Young adult." },
+      { "tag": "", "desc": "Mature adult." },
+      { "tag": "+", "desc": "You've been around." },
+      { "tag": "++", "desc": "Old enough to know better." },
+      { "tag": "+++", "desc": "Venerable." },
+      { "tag": "+++!", "desc": "Ancient!" },
+      { "tag": "+++!!", "desc": "Older than dirt!!" }
+    ],
+    "format": "A"
+  },
+  {
+    "name": "Origins",
+    "desc": "How did the people of your system come to share the body?",
+    "options": [
+      { "tag": "s", "desc": "Splits. " },
+      { "tag": "w", "desc": "Walk-ins. " },
+      { "tag": "r", "desc": "Reincarnation. " },
+      { "tag": "c", "desc": "Channeled. " },
+      { "tag": "i", "desc": "Interface (body is an interface between two or more worlds, gateway system). " },
+      { "tag": "n", "desc": "Natural (just made that way!). " }
+    ],
+    "format": "O"
+  },
+  {
+    "name": "Worlds",
+    "desc": "This tag refers to the place where members of the system are if they're not fronting. Whether these worlds are another reality, physical place, or inner landscapes (headspace, consensual reality), this tag is to help others get an overall picture of what your system's habitat is like.",
+    "options": [
+      { "tag": "e", "desc": "Essentially the same as Earth." },
+      { "tag": "m", "desc": "Medieval, castles, and so on." },
+      { "tag": "w", "desc": "Wild; essentially untouched nature. " },
+      { "tag": "c", "desc": "Cities, lots of people and buildings. " },
+      { "tag": "t", "desc": "Futuristic with heavy tech content, cyberage. " },
+      { "tag": "s", "desc": "Space, amongst the stars, ships, spacestations. " },
+      { "tag": "u", "desc": "Underground, such as caves and caverns. " },
+      { "tag": "h", "desc": "Sky, celestial, the heavens. " },
+      { "tag": "d", "desc": "Surreal, dreamlike. " },
+      { "tag": "f", "desc": "Flux, always changing. " },
+      { "tag": "#", "desc": "No worlds! " }
+    ],
+    "mods": [
+      { "tag": "-", "desc": "A darker version of the way this type of world is typically envisioned. " },
+      { "tag": "+", "desc": "A lighter version of the way this type of world is typically envisioned. " },
+      { "tag": "|", "desc": "Walled, domed, protected by a barrier in some way. " },
+      { "tag": "^", "desc": "Can be changed and influenced by thought." }
+    ],
+    "format": "W"
+  },
+  {
+    "name": "Co-consciousness",
+    "desc": "Co-consciousness is how well people within a system are able to communicate and share things such as memory and thought. It's very important in how a system functions. This tag helps define how co-conscious members of your system are. (Don't count things that are purposefully kept secret for system safety.)",
+    "options": [
+      { "tag": "--", "desc": "There's no communication or sharing what-so-ever. I don't even know who all is here!" },
+      { "tag": "-", "desc": "We have a hard time communicating." },
+      { "tag": "", "desc": "Still not the best communication in the world, but generally we do pretty good." },
+      { "tag": "+", "desc": "We work well together and communication is great." },
+      { "tag": "++", "desc": "We know everything that's going on with everyone else!" }
+    ],
+    "format": "Cc"
+  },
+  {
+    "name": "Integration ",
+    "type": "radio",
+    "desc": "Integration is a controversial goal of some multiples, combining all members of a system into one. What's your stance? ",
+    "options": [
+      { "tag": "---", "desc": "Integrate this, buddy!" },
+      { "tag": "--", "desc": "We have no intentions of getting squooshed together and find the idea of integration distasteful." },
+      { "tag": "-", "desc": "We're not currently considering integration as an objective for our system, although no one knows where the future may take us." },
+      { "tag": "", "desc": "Our system has natural mergings and seperations, but integration is not something we actively pursue as a goal." },
+      { "tag": "+", "desc": "It is or may be our aim in the future, but we're not working towards integration at this time." },
+      { "tag": "++", "desc": "We're working on it; we hope to achieve unity as a single person." },
+      { "tag": "+++", "desc": "I've achieved my goal of integration. What once was many, now is one." }
+    ],
+		"mods": [
+			{ "tag": "*", "desc":"Status varies; we may at times be separate individuals, and at others fully integrated."},
+			{ "tag": "~", "desc":"Integration happened naturally, as opposed to therapy-guided."},
+			{ "tag": "!", "desc":"We experienced spontaneous integration. (With no intentions to do so, and/or no warning.)"},
+			{ "tag": "=", "desc":"We can integrate and differentiate at will."},
+			{ "tag": "#", "desc":"Integration is simply not possible for our system."}
+		],
+    "format": "I"
+  },
+  {
+    "name": "Outness Factor",
+    "desc": "Many people are closetted about the fact they're a system and present a facade of 'oneness' to the world. How many people know you're a multiple system? This tag is divided by the distribution tag (r for 'real life' and o for 'online'). ",
+    "options": [
+      { "tag": "---", "desc": "No one knows. No one will ever even see this code." },
+      { "tag": "--", "desc": "Letting people know would make us very uncomfortable. We would deny it if it came up." },
+      { "tag": "-", "desc": "If the subject came up, we might come out to a close friend we trust." },
+      { "tag": "", "desc": "One or two close, trustworthy people know." },
+      { "tag": "+", "desc": "Friends know. We don't try to dodge the subject, but don't bring it up, either." },
+      { "tag": "++", "desc": "We're open about it, friends and family know, and we don't try to hide it." },
+      { "tag": "+++", "desc": "Everyone knows... docs, friends, family, hairstylists, strangers.... We make it a point for people to know we're not a singleton." }
+    ],
+    "format": "OF"
+  },
+  {
+    "name": "Paranormal / Anomalous Experience",
+    "desc": "Like singlets, many multiples have had some kind of experience with anomalous occurrences (often mistakenly termed 'paranormal') in the Earth world. This isn't really related to being multiple, but it's something some people have expressed an interest in keeping track of. Here's a tag where you can describe your encounters (keep in mind it refers to experiences while in the earth world; what happens in your own world, if any, does not count for this tag). If you've had experience with more than one, use a backslash to separate them.",
+    "options": [
+      { "tag": "psi", "desc": "Mental phenomena: psi abilities, telepathy, empathy, clairvoyance, etc. " },
+      { "tag": "obe", "desc": "Out of body experience (astral projection), near-death experience, bilocation. " },
+      { "tag": "phy", "desc": "Physical phenomena; telekinesis, poltergeists, stigmata, materialization. " },
+      { "tag": "ext", "desc": "Extraterrestrials, aliens, UFOs. " },
+      { "tag": "ast", "desc": "Astral plane, shamanic journeying, non-physical world, auras. " },
+      { "tag": "cry", "desc": "Cryptozoological animals (sasquatch, chupacabra, black dogs, etc.) " },
+      { "tag": "spi", "desc": "Spirits, ghosts, angels, guides, visitations (e.g. the Virgin Mary, etc.) " },
+      { "tag": "pre", "desc": "Precognition, prophetic dreams or visions, clairvoyance. " },
+      { "tag": "mag", "desc": "Magic(k), prayer, energy working, influencing reality through will. " },
+      { "tag": "#", "desc": "Don't believe in the paranormal. " }
+    ],
+    "mods": [
+      { "tag": "-", "desc": "No such experiences. " },
+      { "tag": "!", "desc": "Something we're really interested in or good at. " },
+      { "tag": "+", "desc": "These things tend to happen around us, but we don't experience them as something any member of our group is doing consciously or deliberately (rather, we are a \"magnet for weird stuff\"). " },
+      { "tag": "=", "desc": "Believe psychic phenomena are real but have never experienced any personally. " },
+      { "tag": "~", "desc": "Sure, we've had such experiences, but they're easily explainable by coincidence, autosuggestion, etc. " }
+    ],
+    "format": "P"
+  },
+  {
+    "name": "Religion",
+    "desc": "This is to denote the faiths within the system. Separate multiple religions with backslashes. ",
+    "options": [
+      {
+        "tag":"f",
+        "desc":"Afro-Caribbean Spirituality"
+      },
+      {
+        "tag":"fs",
+        "desc":"Santeria"
+      },
+      {
+        "tag":"fm",
+        "desc":"Macumba"
+      },
+      {
+        "tag":"fc",
+        "desc":"Candomble"
+      },
+      {
+        "tag":"fv",
+        "desc":"Vodun (Vodou, Voodoo)"
+      },
+      {
+        "tag":"b",
+        "desc":"Baha'i"
+      },
+      {
+        "tag":"x",
+        "desc":"Christian (Protestant)"
+      },
+      {
+        "tag":"xm",
+        "desc":"Amish / Mennonite"
+      },
+      {
+        "tag":"xb",
+        "desc":"Baptist"
+      },
+      {
+        "tag":"xs",
+        "desc":"Christian Scientist"
+      },
+      {
+        "tag":"xe",
+        "desc":"Episcopal / Anglican"
+      },
+      {
+        "tag":"xf",
+        "desc":"Foursquare Gospel (Aimee Semple McPherson)"
+      },
+      {
+        "tag":"xj",
+        "desc":"Jehovah's Witness"
+      },
+      {
+        "tag":"xl",
+        "desc":"Lutheran"
+      },
+      {
+        "tag":"xt",
+        "desc":"Methodist"
+      },
+      {
+        "tag":"xm",
+        "desc":"Mormon"
+      },
+      {
+        "tag":"xn",
+        "desc":"Nazarene"
+      },
+      {
+        "tag":"xpn",
+        "desc":"Pentacostal"
+      },
+      {
+        "tag":"xpr",
+        "desc":"Presbyterian"
+      },
+      {
+        "tag":"xq",
+        "desc":"Quaker"
+      },
+      {
+        "tag":"xsd",
+        "desc":"Seventh-Day Adventist"
+      },
+      {
+        "tag":"xsh",
+        "desc":"Shaker"
+      },
+      {
+        "tag":"c",
+        "desc":"Christian (Catholic)"
+      },
+      {
+        "tag":"cc",
+        "desc":"Coptic"
+      },
+      {
+        "tag":"cr",
+        "desc":"Roman Catholic"
+      },
+      {
+        "tag":"ce",
+        "desc":"Eastern Orthodox"
+      },
+      {
+        "tag":"cet",
+        "desc":"Ethiopian Orthodox"
+      },
+      {
+        "tag":"cg",
+        "desc":"Greek Orthodox"
+      },
+      {
+        "tag":"cr",
+        "desc":"Russian Orthodox"
+      },
+      {
+        "tag":"ci",
+        "desc":"Independent Catholic"
+      },
+      {
+        "tag":"cs",
+        "desc":"Ecumenical / Sophia"
+      },
+      {
+        "tag":"e",
+        "desc":"Eastern Spirituality"
+      },
+      {
+        "tag":"ea",
+        "desc":"Agama Tirta"
+      },
+      {
+        "tag":"eb",
+        "desc":"Buddhism"
+      },
+      {
+        "tag":"eh",
+        "desc":"Hindu"
+      },
+      {
+        "tag":"es",
+        "desc":"Shinto"
+      },
+      {
+        "tag":"et",
+        "desc":"Taoism"
+      },
+      {
+        "tag":"ej",
+        "desc":"Jainism"
+      },
+      {
+        "tag":"i",
+        "desc":"Islamic"
+      },
+      {
+        "tag":"j",
+        "desc":"Jewish"
+      },
+      {
+        "tag":"jo",
+        "desc":"Orthodox"
+      },
+      {
+        "tag":"jr",
+        "desc":"Reform"
+      },
+      {
+        "tag":"jr",
+        "desc":"Conservative"
+      },
+      {
+        "tag":"jc",
+        "desc":"Reconstructionist"
+      },
+      {
+        "tag":"jh",
+        "desc":"Humanistic"
+      },
+      {
+        "tag":"jk",
+        "desc":"Karaite"
+      },
+      {
+        "tag":"p",
+        "desc":"Pagan & Reconstructionist Faiths"
+      },
+      {
+        "tag":"pd",
+        "desc":"Druidism"
+      },
+      {
+        "tag":"pf",
+        "desc":"Faery Faith"
+      },
+      {
+        "tag":"ph",
+        "desc":"Heathen/Asatru (Norse Gods)"
+      },
+      {
+        "tag":"pk",
+        "desc":"Kemetic Orthodox/Egyptian Gods"
+      },
+      {
+        "tag":"pg",
+        "desc":"Hellenic Reconstructionism/Greek Gods"
+      },
+      {
+        "tag":"vr",
+        "desc":"Via Romana (Roman civilization & culture including Roman Gods)"
+      },
+      {
+        "tag":"pr",
+        "desc":"Romantic Paganism"
+      },
+      {
+        "tag":"pc",
+        "desc":"Traditional Witchcraft"
+      },
+      {
+        "tag":"pw",
+        "desc":"Wicca"
+      },
+      {
+        "tag":"s",
+        "desc":"Satanism"
+      },
+      {
+        "tag":"sl",
+        "desc":"LeVay"
+      },
+      {
+        "tag":"st",
+        "desc":"Mediaeval/ traditional"
+      },
+      {
+        "tag":"ss",
+        "desc":"Temple of Set"
+      },
+      {
+        "tag":"sk",
+        "desc":"Sikh"
+      },
+      {
+        "tag":"u",
+        "desc":"Universal Life Church"
+      },
+      {
+        "tag":"~",
+        "desc":"Agnostic"
+      },
+      {
+        "tag":"a",
+        "desc":"Atheist"
+      },
+      {
+        "tag":"g",
+        "desc":"Gnostic"
+      },
+      {
+        "tag":"h",
+        "desc":"Humanist"
+      },
+      {
+        "tag":"n",
+        "desc":"Pantheist"
+      },
+      {
+        "tag":"nw",
+        "desc":"New Age"
+      },
+      {
+        "tag":"r",
+        "desc":"RastafarIan"
+      },
+      {
+        "tag":"rc",
+        "desc":"Rosicrucian (AMORC or otherwise)"
+      },
+      {
+        "tag":"t",
+        "desc":"Scientology"
+      },
+      {
+        "tag":"sp",
+        "desc":"Spiritualism / Spiritualist Church"
+      },
+      {
+        "tag":"uu",
+        "desc":"Unitarian-Universalism"
+      },
+      {
+        "tag":"ast",
+        "desc":"Astrology"
+      },
+      {
+        "tag":"aut",
+        "desc":"Automatisms such as ouija boards, automatic writing"
+      },
+      {
+        "tag":"div",
+        "desc":"Divination, e.g. tarot, I Ching, scrying"
+      },
+      {
+        "tag":"fok",
+        "desc":"Afro-American folk magic or hoodoo"
+      },
+      {
+        "tag":"pow",
+        "desc":"Mexican folk magic or curandero practice"
+      },
+      {
+        "tag":"med",
+        "desc":"Mediumship, attempts to contact people, particularly loved ones, in the next life"
+      },
+      {
+        "tag":"#",
+        "desc":"Unique System/Personal Religion or Non-Terran Faith"
+      }
+    ],
+    "mods": [
+      {
+        "tag":"^",
+        "desc":"This religion/faith system is practiced in the Earth world."
+      },
+      {
+        "tag":"+",
+        "desc":"More than one member practices this religion."
+      }
+    ],
+    "format": "F"
+  },
+  {
+    "name": "Availability",
+    "desc": "Are you taken? Happily married or single and looking? Happy as a bachelor? The following tags depict relationships with other non-system people. (T stands for if you're 'taken' or not.) ",
+    "options": [
+      { "tag": "T+++", "desc": "Are we taken? Ask our children!" },
+      { "tag": "T++", "desc": "Ask our significant other(s)!" },
+      { "tag": "T+", "desc": "Ask our sweetheart(s)!" },
+      { "tag": "T", "desc": "Ask us, please!" },
+      { "tag": "T-", "desc": "Don't ask!" },
+      { "tag": "T--", "desc": "Happily single." },
+      { "tag": "T---", "desc": "We won't even consider a relationship." },
+      { "tag": "T+-+", "desc": "Single with kids." },
+      { "tag": "(T)", "desc": "Ask and you'll get a boot to a sensitive spot." },
+      { "tag": "T(w)", "desc": "Widowed." }
+    ],
+    "mods": [
+      {
+        "tag":"#",
+        "desc":"Our significant other(s) is/are also a multiple system."
+      },
+      {
+        "tag":"*",
+        "desc":"We have intrasystem relationship(s) (instead of or as well as)."
+      },
+      {
+        "tag":"^",
+        "desc":"Long distance relationship."
+      }
+    ],
+    "format": "T"
+  },
+  {
+    "name": "Sexuality",
+    "desc": "Sexuality, like gender, can be a complicated point for multiples. This tag is to denote the sexuality of both the system overall and uses a distribution tag to specify individual sexualities within the system (X, with the sexuality the system presents or identifies with, followed by members' sexualities separated by backslashes in parentheses). ",
+    "options": [
+      { "tag": "g", "desc": "Homosexual, gay, lesbian " },
+      { "tag": "s", "desc": "Heterosexual, straight " },
+      { "tag": "b", "desc": "Bisexual" },
+      { "tag": "a", "desc": "Asexual" },
+      { "tag": "p", "desc": "Pansexual" },
+      { "tag": "o", "desc": "Other" }
+    ],
+    "mods": [
+      { "tag": "=", "desc": "Vanilla Sex, no kinks" },
+      { "tag": "-", "desc": "Monogamous" },
+      { "tag": "+", "desc": "Polyamorous/Polyfidelitous" },
+      { "tag": "^", "desc": "Kinks, Fetishes (Unidentified)" },
+      { "tag": "!", "desc": "Kinks: BDSM" },
+      { "tag": "@", "desc": "Kinks: Leather" },
+      { "tag": "#", "desc": "Kinks: Furries, Plushophilia" },
+      { "tag": "&", "desc": "Kinks: Corsets, Waist Training" },
+      { "tag": "~", "desc": "Kinks: Feederism, Weight, Fat Admiration" },
+      { "tag": "%", "desc": "Kinks: Body Modification, Art" }
+    ],
+    "format": "X"
+  },
+  {
+    "name": "Job",
+    "type": "checkbox",
+    "desc": "This refers to what the system (or a member of the system) does to make money in the Earth world, rather than jobs within the system. What career path are you on? ",
+    "options": [
+      {
+        "tag":"pa",
+        "desc":"Artist (Performing)"
+      },
+      {
+        "tag":"a",
+        "desc":"Artist (Visual)"
+      },
+      {
+        "tag":"c",
+        "desc":"Computers (IS DIS MP)"
+      },
+      {
+        "tag":"ch",
+        "desc":"Child Care"
+      },
+      {
+        "tag":"cu",
+        "desc":"Customer Services"
+      },
+      {
+        "tag":"x",
+        "desc":"Disabled"
+      },
+      {
+        "tag":"ed",
+        "desc":"Education/Training"
+      },
+      {
+        "tag":"en",
+        "desc":"Engineering"
+      },
+      {
+        "tag":"h",
+        "desc":"Homemaker"
+      },
+      {
+        "tag":"w",
+        "desc":"Internet/Web"
+      },
+      {
+        "tag":"gov",
+        "desc":"Government/Military"
+      },
+      {
+        "tag":"m",
+        "desc":"Management/Executive"
+      },
+      {
+        "tag":"p",
+        "desc":"Production/Manufacturing"
+      },
+      {
+        "tag":"r",
+        "desc":"Retail"
+      },
+      {
+        "tag":"ret",
+        "desc":"Retired"
+      },
+      {
+        "tag":"sci",
+        "desc":"Science, Research"
+      },
+      {
+        "tag":"sx",
+        "desc":"Sex worker"
+      },
+      {
+        "tag":"so",
+        "desc":"Social Work, Nursing, Care"
+      },
+      {
+        "tag":"s",
+        "desc":"Student"
+      },
+      {
+        "tag":"pro",
+        "desc":"Professional (Doctor, Lawyer, etc.)"
+      },
+      {
+        "tag":"u",
+        "desc":"Unemployed"
+      },
+      {
+        "tag":"wr",
+        "desc":"Writer"
+      }
+    ],
+    "mods": [
+      {
+        "tag":"!",
+        "desc":"And I really like it!"
+      },
+      {
+        "tag":"~",
+        "desc":"I'd like to change jobs."
+      }
+    ],
+    "format": "J"
+  },
+  {
+    "name": "Diet (Overall)",
+    "desc": "What foods are let into the body? This is for overall food 'system rules' -- if one member is vegan and one is carnivorous and they both are allowed their diets, then the body would be omnivorous. ",
+    "options": [
+      { "tag": "v", "desc": "Vegan -- No one in the system eats any animal products whatsoever. " },
+      { "tag": "g", "desc": "Vegetarian -- No animal flesh." },
+      { "tag": "o", "desc": "Omnivore -- Both veggies and meat." },
+      { "tag": "c", "desc": "Carnivore -- No veggies pass the lips. All meat, all the time." },
+      { "tag": "j", "desc": "Junk Food -- Steady diet of fried foods, candy, and soda. " },
+      { "tag": "b", "desc": "Vampire -- Exclusive diet of blood. " }
+    ],
+    "format": "D"
+  },
+  {
+    "name": "Roleplaying ",
+    "desc": "Roleplaying games are a factor in some system's lives. Sometimes people in a system may present themselves as a character in order to have fun and express themselves in the Earth world, sometimes new members of a system are discovered through roleplaying, and sometimes it's just for fun! This tag represents how involved in RP you are. (It makes reference to mostly tabletop RP [D&D, World of Darkness, Shadowrun] but can mean live action, MUCK-like or round robin writing style roleplay as well.) ",
+    "options": [
+      { "tag": "---", "desc": "We don't associate with people who roleplay." },
+      { "tag": "--", "desc": "Our life is exotic enough. Who needs roleplay?" },
+      { "tag": "-", "desc": "Tried it, but decided it wasn't for us." },
+      { "tag": "", "desc": "Fun enough, it'll kill time. We'll roleplay once in a while." },
+      { "tag": "+", "desc": "We have regular sessions for roleplay set up. Wait anxiously for the next one." },
+      { "tag": "++", "desc": "There is no life but roleplay. We know all the rules of my chosen game; don't need no handbook. Our dice are our friends." },
+      { "tag": "+++", "desc": "We've written and published our own gaming materials." }
+    ],
+    "format": "R"
+  },
+  {
+    "name": "Computers",
+    "desc": "How much do you like computers? How friendly are you with them? ",
+    "options": [
+      { "tag": "---", "desc": "They short out when we get near." },
+      { "tag": "--", "desc": "We're still trying to program the VCR." },
+      { "tag": "-", "desc": "We've got our PC, we use it as a tool, that's all it's good for.." },
+      { "tag": "", "desc": "Computers are handy instruments and fun as well." },
+      { "tag": "+", "desc": "We like our computer and we have a decent understanding with it." },
+      { "tag": "++", "desc": "They're large part of our life. We spend quite a bit of time on it everyday." },
+      { "tag": "+++", "desc": "We want to get an interface permanently installed in our brain." }
+    ],
+    "format": "C"
+  },
+  {
+    "name": "Social",
+    "desc": "How social are you with 'outsiders'? Do you tend to be extroverted or introverted? ",
+    "options": [
+      { "tag": "---!", "desc": "We wish there wasn't \"us\" to bother us!" },
+      { "tag": "---", "desc": "We like to be solitary, just us. Pretty much a hermit." },
+      { "tag": "--", "desc": "We live with a roommate or significant other." },
+      { "tag": "-", "desc": "We associate with our extended family or a few friends occasionally." },
+      { "tag": "", "desc": "We have a few close friends." },
+      { "tag": "+", "desc": "We love living in a community." },
+      { "tag": "++", "desc": "We have a lot of friends, and try to be with them as often as possible." },
+      { "tag": "+++", "desc": "We're only happy as part of a huge crowd." }
+    ],
+    "format": "So"
+  },
+  {
+    "name": "Multiple Friend",
+    "desc": "Stuck being only one person in one body? Well, at least you can be friends with multiples! This tag is for non-multiples (singlets, singular folks, singletons, snarfplats, monominds or whatever one wishes to be called, as well as mid-continuum people) only. How well do you get along with Multiples? ",
+    "options": [
+      { "tag": "---", "desc": "You infuriate multiples... if ever something out of an overdramatic media portrayal of insane multiples were to happen, it would be because of you." },
+      { "tag": "--", "desc": "Multiple systems boo in harmony when you come near. You boo back." },
+      { "tag": "-", "desc": "Mutual avoidance." },
+      { "tag": "", "desc": "Tolerance. They don't bother you, and you don't bother them." },
+      { "tag": "+", "desc": "Polite, you might share a cup of tea with one or two members of a system." },
+      { "tag": "++", "desc": "Popular, they've decided to make you an honorary member of the system." },
+      { "tag": "+++", "desc": "Been missing a little time lately?" }
+    ],
+    "format": "MF"
+  }
+]
