@@ -17,7 +17,6 @@ async function MuCParser(){
 	if(input.value){ parseCode()}
 	function parseCode(){
 		utils.reset();
-	//MuC N---! [f] S.H A(b---! r---!) Os We Cc-- I--- OF--- Ppsi Ff T+++ Xg(g) Jpa Dv R--- C--- S---! MF---
 		code = input.value.split(" ");
 		if(code[0] != "MuC"){
 			console.log("malformed code");
@@ -25,6 +24,8 @@ async function MuCParser(){
 		}
 		console.log(code);
 		code.forEach((e,a,i)=>{
+			//MuC N---! [f] S.H A(b---! r---!) Os We Cc-- I--- OF--- Ppsi Ff T+++ Xg(g) Jpa Dv R--- C--- S---! MF---
+	
 			if(e.substr(0,1 == "N")){
 				parseNumbers(e.substr(1));
 			}
@@ -41,6 +42,3 @@ async function MuCParser(){
 		numbersOut
 	}
 }
-//ffmpeg -i 'ghost vengeance.mp4' -c:v libvpx-vp9 -crf 30 -b:v 0 -b:a 128k -c:a libopus output.webm
-
-//ffmpeg -i output.webm -vf "scale=trunc(iw/4)*2:trunc(ih/4)*2" -c:v libvpx-vp9 -crf 30 half_the_frame_size.webm
