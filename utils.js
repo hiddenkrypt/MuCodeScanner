@@ -1,4 +1,25 @@
-function MuCUtils( codeFormat ){
+function MuCUtils( codeFormat ){	
+	
+	this.getOption = function getOption( format, tag ){
+		if(tag.match(/".*"/)) {
+			return tag.replace(/"/g,"");
+		} 
+		let found = format.options.find(e=>e.tag == tag);
+		if( !found ){
+			this.error("Unknown Option: " + tag);
+			return undefined;
+		}
+		return found.desc
+	}
+	
+	this.getMod = function getMod( format, tag ){
+		let found = format.mods.find(e=>e.tag == tag);
+		if( !found ){
+			utils.error("Unknown Mod: " + tag);
+		}
+		return found.desc
+	}
+	
 	this.error = function( message ){
 		let errorOutput = document.getElementById("parsingline");
 		errorOutput.classList.add("error");

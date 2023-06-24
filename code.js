@@ -6,7 +6,7 @@ window.onload = MuCParser;
 async function MuCParser() {
 	const response = await fetch('https://raw.githubusercontent.com/hiddenkrypt/MuCodeScanner/master/MuCFormat.json');
 	const codeFormat = await response.json();
-	let utils = new MuCUtils( codeFormat );
+	let Utils = new MuCUtils( codeFormat );
 		
 		
 	console.log("loaded");
@@ -17,10 +17,10 @@ async function MuCParser() {
 		parseCode() 
 	}
 	function parseCode() {
-		utils.reset();
+		Utils.reset();
 		code = input.value.split(" ");
 		if( code[0] != "MuC" ) {
-			utils.error("malformed or missing MuC Header");
+			Utils.error("malformed or missing MuC Header");
 			return
 		}
 		code.forEach( (e,a,i) => {
@@ -30,19 +30,22 @@ async function MuCParser() {
 			} else if( e.substr(0,1) == "[") {
 				parseGenders( e.replace(/[\[\]]/g, "") );
 			} else if( e.substr(0,2) == "S.") {
-				parseSpecies( e.substr(0,2) );
+				parseSpecies( e.substr(2) );
 			}
 		});
 	}
 	function getFormat(by) {
 		return codeFormat.find(e=>e.format == by);
 	}
+	
+	
+	
 	function parseNumbers(tagString) {	
 		let numberFormat = getFormat("N");
 		let cleanString = tagString.replace(/[#^]/g,'').replace(/".*"/g,'');
 		let number = numberFormat.options.find(e=>e.tag == cleanString);
 		if( !number ){
-			utils.error("Malformed Number Field");
+			Utils.error("Malformed Number Field");
 			return;
 			
 		}
@@ -64,20 +67,14 @@ async function MuCParser() {
 			content.innerHTML += ")";
 		}
 	}
+	
+	
+	
 	function parseGenders( tagString ) {
 		let content = document.getElementById("[content");
 		let genderFormat = getFormat("[");
 		function getGender(gender){
-			
-			if(gender.match(/".*"/)) {
-				return gender.replace(/"/g,"");
-			} else {
-				let found = genderFormat.options.find(e=>e.tag == gender);
-				if( !found ){
-					utils.error("Malformed Gender Field");
-				}
-				return found.desc
-			}
+			return Utils.getOption( genderFormat, gender );
 		}
 		let firstGenderTag = tagString.split(";")[0];
 		let firstGender = getGender(firstGenderTag);
@@ -90,9 +87,34 @@ async function MuCParser() {
 		content.innerHTML += "<br>Some members of this system are " + remainingGenderTags.map(getGender).join(", ");
 		//Pick up tomorrow from here
 	}
-	function parseGenders( tagString ) {
-	let content = document.getElementById("S.content");
-	let speciesFormat = getFormat("S.");
-	function getSpecies(speciesTag){}
-			
+
+	
+	
+	function parseSpecies( tagString ) {
+		let content = document.getElementById("S.content");
+		let speciesFormat = getFormat("S.");
+		function getSpecies( speciesTag ) {
+			console.log("looking for:"+speciesTag);
+			if( speciesTag.includes( "+" ) ) {	
+				return Utils.getMod( speciesFormat, "+" ) + getSpecies( speciesTag.replace(/\+/g, "")  );
+			}
+			if( speciesTag.includes( "*" ) ) {	
+				return "A " +  Utils.getMod( speciesFormat, "*" ) + getSpecies( speciesTag.replace(/\*/g, "") );
+			}
+			if( speciesTag.includes( "&" ) ) {	
+				if( speciesTag.split("&").length == 2){
+					return "A half " + speciesTag.split("&").map(getSpecies).join(", half ");
+				}
+				return "A cross between: " + speciesTag.split("&").map(getSpecies).join(", ");
+			}
+			if( speciesTag.includes( "?" ) ) {}
+			if( speciesTag.includes( "^" ) ) {}
+			if( speciesTag.includes( "~" ) ) {
+				return "A Shapeshifter with " + speciesTag.split("~").map(getSpecies).join(", ") + " forms.";
+			}		
+			return Utils.getOption( speciesFormat, speciesTag );
+		}
+		let allSpecies = tagString.split("/").map(getSpecies);
+		console.log( allSpecies );
+	}
 }

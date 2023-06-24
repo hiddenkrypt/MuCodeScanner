@@ -675,11 +675,11 @@
     "mods": [
       {
         "tag":"+",
-        "desc":"More than one of previous species."
+        "desc":"More than one "
       },
       {
         "tag":"*",
-        "desc":"Anthro version of previous species (a furry)."
+        "desc":"Furry/Anthro "
       },
       {
         "tag":"&",
@@ -687,15 +687,15 @@
       },
       {
         "tag":"?",
-        "desc":"Unknown."
+        "desc":"(Unknown)"
       },
       {
         "tag":"^",
-        "desc":"Non-sentient (intelligent, reasoning, sapient)."
+        "desc":"(Non-sentient)"
       },
       {
         "tag":"~",
-        "desc":"Used as a modifier to denote a shapeshifter with limited forms (Combining this and the next species. Must be used as the last modifier)."
+        "desc":"A Shapeshifter with "
       }
     ]
   },
