@@ -1,0 +1,15 @@
+#codeInput{
+	width:100%;
+}
+#inputContainer{
+	padding:2em;
+	border-radius:2em;
+	border: 1px solid black;
+	background-color:#efefef
+}
+body{
+	background-color:#a1ffa1
+}
+#outputContainer{
+	display:none;
+}
