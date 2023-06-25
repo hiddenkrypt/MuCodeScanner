@@ -748,10 +748,10 @@
       { "tag": "?", "desc": "Unknown" }
     ],
     "mods": [
-      { "tag": "-", "desc": "A darker version of the way this type of world is typically envisioned. " },
-      { "tag": "+", "desc": "A lighter version of the way this type of world is typically envisioned. " },
-      { "tag": "|", "desc": "Walled, domed, protected by a barrier in some way. " },
-      { "tag": "^", "desc": "Can be changed and influenced by thought." }
+      { "tag": "-", "desc": "(A darker version of the way this type of world is typically envisioned)" },
+      { "tag": "+", "desc": "(A lighter version of the way this type of world is typically envisioned)" },
+      { "tag": "|", "desc": "(Walled, domed, protected by a barrier in some way)" },
+      { "tag": "^", "desc": "(Can be changed and influenced by thought)" }
     ],
     "format": "W"
   },

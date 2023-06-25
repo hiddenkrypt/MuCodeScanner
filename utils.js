@@ -26,6 +26,14 @@ function MuCUtils( codeFormat ){
 		}
 		return found.desc
 	}
+	this.existsMod = function existsMod( format, tag ){
+		let found = format.mods.find(e=>e.tag == tag);
+		return  !!found;
+	}
+	this.existsOption = function existsOption( format, tag ){
+		let found = format.options.find(e=>e.tag == tag);
+		return  !!found;
+	}
 	
 	this.error = function( message ){
 		let errorOutput = document.getElementById("parsingline");

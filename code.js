@@ -18,7 +18,16 @@ async function MuCParser() {
 	}
 	function parseCode() {
 		Utils.reset();
-		code = input.value.split(" ");
+		
+		
+		let code = input.value.split("\"").map ((e,i)=>{
+			if( i%2 != 0 ) {
+				return '"'+e.replace(/ /g,"&nbsp;")+'"';
+			}
+			return e;
+		}).join("").split(" ");
+		console.log(code);
+		
 		if( code[0] != "MuC" ) {
 			Utils.error("malformed or missing MuC Header");
 			return
@@ -38,6 +47,7 @@ async function MuCParser() {
 			} else if( e.substr(0,1) == "O" && e.substr(0,2) != "OF") {
 				parseOrigins( e.substr(1) );
 			} else if( e.substr(0,1) == "W" ) {
+				console.log("world:"+e);
 				parseWorlds( e.substr(1) );
 			} else {
 				//Utils.error("Unknown or unimplemented tag: "+e); 
@@ -168,8 +178,35 @@ async function MuCParser() {
 	function parseWorlds( worldString ){
 		let content = document.getElementById("Wcontent");
 		let format = Utils.getFormat("W");
-		console.log(worldString);
-		let worlds = worldString.split("/").map(e=> Utils.getOption( format, e ));
+		console.log("worldString: " + worldString);
+		let worlds = worldString.split("/").map(parseWorldTag);
+		
+		function parseWorldTag( tag ){
+			console.log("parse individual world:"+tag);
+			if (!tag || tag == ""){
+				return "";
+			}
+			let quotes = (tag.match(/"/g) || []).length;
+			if(quotes > 2 || quotes == 1){
+				Utils.error("broken or excessive quotes in world: "+tag);
+				return "<<parsing error>>";
+			}	else if(quotes == 2){
+				let splits = tag.split("\"")
+				return parseWorldTag(splits[0]) + splits[1] + parseWorldTag(splits[2]);
+			}
+			
+			return tag.split("").map(e=>{
+				console.log("map checking: "+e);
+				if( Utils.existsOption( format, e )){
+					return Utils.getOption( format, e );
+				} else if(  Utils.existsMod( format, e )){
+					return Utils.getMod( format, e );
+				}
+				return "";
+			}).join(" ");
+			
+			
+		}		
 		console.log(worlds);
 		content.innerHTML = "This system's worlds include:<ul><li>"+ worlds.join("<li>") + "</ul>";
 		document.getElementById("Wcontainer").style.display = "block";
