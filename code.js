@@ -9,7 +9,6 @@ async function MuCParser() {
 	let Utils = new MuCUtils( codeFormat );
 		
 		
-	console.log("loaded");
 	let input = document.getElementById("codeInput");
 	
 	input.addEventListener( "input", parseCode );
@@ -22,11 +21,10 @@ async function MuCParser() {
 		
 		let code = input.value.split("\"").map ((e,i)=>{
 			if( i%2 != 0 ) {
-				return '"'+e.replace(/ /g,"&nbsp;")+'"';
+				return '"'+e.replace(/ /g,"\t")+'"';
 			}
 			return e;
 		}).join("").split(" ");
-		console.log(code);
 		
 		if( code[0] != "MuC" ) {
 			Utils.error("malformed or missing MuC Header");
@@ -47,7 +45,6 @@ async function MuCParser() {
 			} else if( e.substr(0,1) == "O" && e.substr(0,2) != "OF") {
 				parseOrigins( e.substr(1) );
 			} else if( e.substr(0,1) == "W" ) {
-				console.log("world:"+e);
 				parseWorlds( e.substr(1) );
 			} else {
 				//Utils.error("Unknown or unimplemented tag: "+e); 
@@ -84,10 +81,9 @@ async function MuCParser() {
 			content.innerHTML += ")";
 		}
 		
+		
 		document.getElementById("Ncontainer").style.display = "block";
 	}
-	
-	
 	
 	function parseGenders( tagString ) {
 		let content = document.getElementById("[content");
@@ -142,6 +138,8 @@ async function MuCParser() {
 		}
 		let allSpecies = tagString.split("/").map(getSpecies);
 		content.innerHTML = "This system's members include:<ul><li>"+ allSpecies.join("<li>") + "</ul>";
+		
+		
 		document.getElementById("S.container").style.display = "block";
 	}
 	
@@ -161,15 +159,14 @@ async function MuCParser() {
 				content.innerHTML += "<br>This system's members include the ages of " + systemRangeTags.map(e=> "'" + Utils.getOption( format, e ) + "'" ).join();
 			}
 		}
+		
 		document.getElementById("Acontainer").style.display = "block";
 	}
 	
 	function parseOrigins( originString ){
 		let content = document.getElementById("Ocontent");
 		let format = Utils.getFormat("O");
-		console.log(originString);
 		let origins = originString.split("/").map(e=> Utils.getOption( format, e ));
-		console.log(origins);
 		content.innerHTML = "The origins of this systems members include:<ul><li>"+ origins.join("<li>") + "</ul>";
 		document.getElementById("Ocontainer").style.display = "block";
 	}
@@ -178,11 +175,9 @@ async function MuCParser() {
 	function parseWorlds( worldString ){
 		let content = document.getElementById("Wcontent");
 		let format = Utils.getFormat("W");
-		console.log("worldString: " + worldString);
 		let worlds = worldString.split("/").map(parseWorldTag);
 		
 		function parseWorldTag( tag ){
-			console.log("parse individual world:"+tag);
 			if (!tag || tag == ""){
 				return "";
 			}
@@ -196,7 +191,6 @@ async function MuCParser() {
 			}
 			
 			return tag.split("").map(e=>{
-				console.log("map checking: "+e);
 				if( Utils.existsOption( format, e )){
 					return Utils.getOption( format, e );
 				} else if(  Utils.existsMod( format, e )){
@@ -207,8 +201,8 @@ async function MuCParser() {
 			
 			
 		}		
-		console.log(worlds);
 		content.innerHTML = "This system's worlds include:<ul><li>"+ worlds.join("<li>") + "</ul>";
+		
 		document.getElementById("Wcontainer").style.display = "block";
 	}
 	
