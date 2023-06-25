@@ -36,24 +36,21 @@ async function MuCParser() {
 				parseAge( (e+"|"+code[i+1]).substr(1).replace(/[\(\)]/g, "") );
 				i++;
 			} else if( e.substr(0,1) == "O" && e.substr(0,2) != "OF") {
-				console.log(e.substr(0,1));
-				console.log(e.substr(1,1));
 				parseOrigins( e.substr(1) );
+			} else if( e.substr(0,1) == "W" ) {
+				parseWorlds( e.substr(1) );
 			} else {
 				//Utils.error("Unknown or unimplemented tag: "+e); 
 			}
 		}
 	}
-	function getFormat(by) {
-		return codeFormat.find(e=>e.format == by);
-	}
 	
 	
 	
 	function parseNumbers(tagString) {	
-		let numberFormat = getFormat("N");
+		let format = Utils.getFormat("N");
 		let cleanString = tagString.replace(/[#^]/g,'').replace(/".*"/g,'');
-		let number = numberFormat.options.find(e=>e.tag == cleanString);
+		let number = format.options.find(e=>e.tag == cleanString);
 		if( !number ){
 			Utils.error("Malformed Number Field");
 			return;
@@ -63,12 +60,12 @@ async function MuCParser() {
 		content.innerHTML = number.desc;
 		if( tagString.includes( "#" ) ) {
 			content.innerHTML += "<br>("
-			content.innerHTML += numberFormat.mods.find(e=>e.tag == "#").desc;
+			content.innerHTML += format.mods.find(e=>e.tag == "#").desc;
 			content.innerHTML += ")";
 		}
 		if( tagString.includes( "^" ) ) {
 			content.innerHTML += "<br>(";
-			content.innerHTML += numberFormat.mods.find(e=>e.tag == "^").desc;
+			content.innerHTML += format.mods.find(e=>e.tag == "^").desc;
 			content.innerHTML += ")";
 		}
 		if( tagString.includes( '"' ) ) {
@@ -84,12 +81,12 @@ async function MuCParser() {
 	
 	function parseGenders( tagString ) {
 		let content = document.getElementById("[content");
-		let genderFormat = getFormat("[");
+		let format = Utils.getFormat("[");
 		function getGender(gender){
-			return Utils.getOption( genderFormat, gender );
+			return Utils.getOption( format, gender );
 		}
 		let firstGenderTag = tagString.split(";")[0];
-		let firstGender = getGender(firstGenderTag);
+		let firstGender = getGender( firstGenderTag );
 		
 		content.innerHTML = "This system idenfies their body as " + firstGender + "<hr>";
 		if(!tagString.split(";")[1]){
@@ -105,13 +102,13 @@ async function MuCParser() {
 	
 	function parseSpecies( tagString ) {
 		let content = document.getElementById("S.content");
-		let speciesFormat = getFormat("S.");
+		let format = Utils.getFormat("S.");
 		function getSpecies( speciesTag ) {
 			if( speciesTag.includes( "+" ) ) {	
-				return Utils.getMod( speciesFormat, "+" ) + getSpecies( speciesTag.replace(/\+/g, "")  );
+				return Utils.getMod( format, "+" ) + getSpecies( speciesTag.replace(/\+/g, "")  );
 			}
 			if( speciesTag.includes( "*" ) ) {	
-				return "A " +  Utils.getMod( speciesFormat, "*" ) + getSpecies( speciesTag.replace(/\*/g, "") );
+				return "A " +  Utils.getMod( format, "*" ) + getSpecies( speciesTag.replace(/\*/g, "") );
 			}
 			if( speciesTag.includes( "&" ) ) {	
 				if( speciesTag.split("&").length == 2){
@@ -123,15 +120,15 @@ async function MuCParser() {
 				if( speciesTag == "?" ) {
 					return "Unknown";
 				}
-				return getSpecies( speciesTag.replace(/\?/g, "") ) +  Utils.getMod( speciesFormat, "?" );
+				return getSpecies( speciesTag.replace(/\?/g, "") ) +  Utils.getMod( format, "?" );
 			}
 			if( speciesTag.includes( "^" ) ) {
-				return getSpecies( speciesTag.replace(/\^/g, "") ) +  Utils.getMod( speciesFormat, "^" );
+				return getSpecies( speciesTag.replace(/\^/g, "") ) +  Utils.getMod( format, "^" );
 			}
 			if( speciesTag.includes( "~" ) ) {
 				return "A Shapeshifter with " + speciesTag.split("~").map(getSpecies).join(", ") + " forms";
 			}		
-			return Utils.getOption( speciesFormat, speciesTag );
+			return Utils.getOption( format, speciesTag );
 		}
 		let allSpecies = tagString.split("/").map(getSpecies);
 		content.innerHTML = "This system's members include:<ul><li>"+ allSpecies.join("<li>") + "</ul>";
@@ -142,16 +139,16 @@ async function MuCParser() {
 	
 	function parseAge( ageString ){
 		let content = document.getElementById("Acontent");
-		let ageFormat = getFormat("A");
+		let format = Utils.getFormat("A");
 		let bodyTag = ageString.split("|")[0].substr(1);
-		content.innerHTML = "The body of this sytem is this old: '" + Utils.getOption( ageFormat, bodyTag ) + "'<hr>";
+		content.innerHTML = "The body of this sytem is this old: '" + Utils.getOption( format, bodyTag ) + "'<hr>";
 		
 		let systemRangeTags = ageString.substr(ageString.indexOf("|r")+2).split("/");
 		if(systemRangeTags.length != 0 ){
 			if(systemRangeTags.length == 2){
-				content.innerHTML += "<br><br>System members range in age from '" + Utils.getOption( ageFormat, systemRangeTags[0] ) + "' to '" +  Utils.getOption( ageFormat, systemRangeTags[1] ) + "'";
+				content.innerHTML += "<br><br>System members range in age from '" + Utils.getOption( format, systemRangeTags[0] ) + "' to '" +  Utils.getOption( format, systemRangeTags[1] ) + "'";
 			} else {
-				content.innerHTML += "<br>This system's members include the ages of " + systemRangeTags.map(e=> "'" + Utils.getOption( ageFormat, e ) + "'" ).join();
+				content.innerHTML += "<br>This system's members include the ages of " + systemRangeTags.map(e=> "'" + Utils.getOption( format, e ) + "'" ).join();
 			}
 		}
 		document.getElementById("Acontainer").style.display = "block";
@@ -159,12 +156,24 @@ async function MuCParser() {
 	
 	function parseOrigins( originString ){
 		let content = document.getElementById("Ocontent");
-		let originsFormat = getFormat("O");
+		let format = Utils.getFormat("O");
 		console.log(originString);
-		let origins = originString.split("/").map(e=> Utils.getOption( originsFormat, e ));
+		let origins = originString.split("/").map(e=> Utils.getOption( format, e ));
 		console.log(origins);
 		content.innerHTML = "The origins of this systems members include:<ul><li>"+ origins.join("<li>") + "</ul>";
 		document.getElementById("Ocontainer").style.display = "block";
-		
 	}
+	
+	
+	function parseWorlds( worldString ){
+		let content = document.getElementById("Wcontent");
+		let format = Utils.getFormat("W");
+		console.log(worldString);
+		let worlds = worldString.split("/").map(e=> Utils.getOption( format, e ));
+		console.log(worlds);
+		content.innerHTML = "This system's worlds include:<ul><li>"+ worlds.join("<li>") + "</ul>";
+		document.getElementById("Wcontainer").style.display = "block";
+	}
+	
+	
 }

@@ -744,7 +744,8 @@
       { "tag": "h", "desc": "Sky, celestial, the heavens. " },
       { "tag": "d", "desc": "Surreal, dreamlike. " },
       { "tag": "f", "desc": "Flux, always changing. " },
-      { "tag": "#", "desc": "No worlds! " }
+      { "tag": "#", "desc": "No worlds! " },
+      { "tag": "?", "desc": "Unknown" }
     ],
     "mods": [
       { "tag": "-", "desc": "A darker version of the way this type of world is typically envisioned. " },

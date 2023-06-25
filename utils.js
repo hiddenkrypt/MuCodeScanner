@@ -1,4 +1,8 @@
 function MuCUtils( codeFormat ){	
+
+	this.getFormat = function getFormat(by) {
+		return codeFormat.find(e=>e.format == by);
+	};
 	
 	this.getOption = function getOption( format, tag ){
 		if(tag.match(/^".*"$/)) {
