@@ -60,10 +60,7 @@ async function MuCParser() {
 		let content = document.getElementById( "Ncontent" );
 		let format = Utils.getFormat("N");
 		let cleanString = tagString.replace(/[#^]/g,'').replace(/".*"/g,'');
-
-		console.log(cleanString);
 		content.innerHTML = Utils.getOption(format, cleanString);
-
 		if( tagString.includes( "#" ) ) {
 			content.innerHTML += "<br>" + Utils.getMod(format, "#");
 		}
@@ -170,7 +167,6 @@ async function MuCParser() {
 		let content = document.getElementById("Wcontent");
 		let format = Utils.getFormat("W");
 		let worlds = worldString.split("/").map(parseWorldTag);
-
 		function parseWorldTag( tag ){
 			if (!tag || tag == ""){
 				return "";
@@ -183,7 +179,6 @@ async function MuCParser() {
 				let splits = tag.split("\"")
 				return parseWorldTag(splits[0]) + splits[1] + parseWorldTag(splits[2]);
 			}
-
 			return tag.split("").map(e=>{
 				if( Utils.existsOption( format, e )){
 					return Utils.getOption( format, e );
@@ -192,16 +187,14 @@ async function MuCParser() {
 				}
 				return "";
 			}).join(" ");
-
-
 		}
 		content.innerHTML = "This system's worlds include:<ul><li>"+ worlds.join("<li>") + "</ul>";
-
 		document.getElementById("Wcontainer").style.display = "block";
 	}
 
 	function parseCoconsciousness( tagString ){
-
 		let content = document.getElementById("Cccontent");
+		content.innerHTML = Utils.getOption(Utils.getFormat("Cc"), tagString);
+		document.getElementById("Cccontainer").style.display = "block";
 	}
 }
