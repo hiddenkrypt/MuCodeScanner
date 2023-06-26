@@ -19,8 +19,8 @@
       { "tag": "?", "desc": "Darned if we know!" }
     ],
     "mods": [
-      { "tag": "#", "desc": "Most of us don't use the body." },
-      { "tag": "^", "desc": "Everyone front-runs. Given enough time with us, you'll see everybody." }
+      { "tag": "#", "desc": "(Most of us don't use the body.)" },
+      { "tag": "^", "desc": "(Everyone front-runs. Given enough time with us, you'll see everybody.)" }
     ]
   },
   {
