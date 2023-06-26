@@ -177,7 +177,7 @@ async function MuCParser() {
 				return "<<parsing error>>";
 			}	else if(quotes == 2){
 				let splits = tag.split("\"")
-				return parseWorldTag(splits[0]) + splits[1] + parseWorldTag(splits[2]);
+				return parseWorldTag(splits[0]) + `(${splits[1]})` + parseWorldTag(splits[2]);
 			}
 			return tag.split("").map(e=>{
 				if( Utils.existsOption( format, e )){
@@ -185,6 +185,7 @@ async function MuCParser() {
 				} else if(  Utils.existsMod( format, e )){
 					return Utils.getMod( format, e );
 				}
+				Utils.error("Unknown world: "+tag);
 				return "";
 			}).join(" ");
 		}
