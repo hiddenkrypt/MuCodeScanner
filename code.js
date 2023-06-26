@@ -46,6 +46,8 @@ async function MuCParser() {
 				parseOrigins( e.substr(1) );
 			} else if( e.substr(0,1) == "W" ) {
 				parseWorlds( e.substr(1) );
+			} else if( e.substr(0,2) == "Cc" ) {
+				parseCoconsciousness( e.substr(2) );
 			} else {
 				//Utils.error("Unknown or unimplemented tag: "+e); 
 			}
@@ -206,5 +208,8 @@ async function MuCParser() {
 		document.getElementById("Wcontainer").style.display = "block";
 	}
 	
-	
+	function parseCoconsciousness( tagString ){
+		
+		let content = document.getElementById("Cccontent");
+	}
 }
