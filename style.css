@@ -3,7 +3,7 @@ body{
 	font-size:12px;
 	font-family:courier, monospace;
 }
-h3{ 
+h3{
 	margin:0;
 	text-align:center
 }
@@ -48,9 +48,9 @@ h3{
 	background-color:#efefef;
 	width:fit-content;
 	padding:1em;
-	/* max-width: 20em; */
+	max-width: 45%;
 	display:none;
-	
+
 }
 .hintblock{
 	font-size:.5em;
@@ -65,7 +65,7 @@ h3{
 	vertical-align:middle;
 	margin-left:.5em;
 	margin-bottom:1.5em;
-	
+
 }
 .hintblock .tooltip {
   visibility: hidden;
@@ -81,7 +81,7 @@ h3{
 .hintblock:hover .tooltip {
   visibility: visible;
 }
-#footer{	
+#footer{
 	width:100%;
 	padding: 0;
 	margin: 0;

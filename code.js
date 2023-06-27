@@ -7,27 +7,22 @@ async function MuCParser() {
 	const response = await fetch('https://raw.githubusercontent.com/hiddenkrypt/MuCodeScanner/master/MuCFormat.json', {cache: "no-store"});
 	const codeFormat = await response.json();
 	let Utils = new MuCUtils( codeFormat );
-
-
 	let input = document.getElementById("codeInput");
-
 	input.addEventListener( "input", parseCode );
 	if( input.value ){
 		parseCode()
 	}
+
 	function parseCode() {
 		Utils.reset();
-
-
 		let code = input.value.split("\"").map ((e,i)=>{
 			if( i%2 != 0 ) {
 				return '"'+e.replace(/ /g,"\t")+'"';
 			}
 			return e;
 		}).join("").split(" ");
-
 		if( code[0] != "MuC" ) {
-			Utils.error("malformed or missing MuC Header");
+			Utils.error("This does not appear to be a MuC Code");
 			return
 		}
 		for(let i=0; i< code.length; i++){
@@ -48,13 +43,13 @@ async function MuCParser() {
 				parseWorlds( e.substr(1) );
 			} else if( e.substr(0,2) == "Cc" ) {
 				parseCoconsciousness( e.substr(2) );
+			} else if( e.substr(0,1) == "I" ) {
+				parseIntegration( e.substr(1) );
 			} else {
 				//Utils.error("Unknown or unimplemented tag: "+e);
 			}
 		}
 	}
-
-
 
 	function parseNumbers(tagString) {
 		let content = document.getElementById( "Ncontent" );
@@ -71,8 +66,6 @@ async function MuCParser() {
 			content.innerHTML += "<br>(" + tagString.match(/".*"/)[0].replace(/"/g,"");
 			content.innerHTML += ")";
 		}
-
-
 		document.getElementById("Ncontainer").style.display = "block";
 	}
 
@@ -84,13 +77,12 @@ async function MuCParser() {
 		}
 		let firstGenderTag = tagString.split(";")[0];
 		let firstGender = getGender( firstGenderTag );
-
 		content.innerHTML = "This system idenfies their body as " + firstGender + "<hr>";
 		if(!tagString.split(";")[1]){
 			return;
 		}
 		let remainingGenderTags = tagString.split(";")[1].split("/");
-		content.innerHTML += "Members of this system include:<ul><li>" + remainingGenderTags.map(getGender).join("<li>") + "</ul>";
+		content.innerHTML += "Members of this system are:<ul><li>" + remainingGenderTags.map(getGender).join("<li>") + "</ul>";
 
 		document.getElementById("[container").style.display = "block";
 	}
@@ -128,9 +120,7 @@ async function MuCParser() {
 			return Utils.getOption( format, speciesTag );
 		}
 		let allSpecies = tagString.split("/").map(getSpecies);
-		content.innerHTML = "This system's members include:<ul><li>"+ allSpecies.join("<li>") + "</ul>";
-
-
+		content.innerHTML = "<ul><li>"+ allSpecies.join("<li>") + "</ul>";
 		document.getElementById("S.container").style.display = "block";
 	}
 
@@ -158,7 +148,7 @@ async function MuCParser() {
 		let content = document.getElementById("Ocontent");
 		let format = Utils.getFormat("O");
 		let origins = originString.split("/").map(e=> Utils.getOption( format, e ));
-		content.innerHTML = "The origins of this systems members include:<ul><li>"+ origins.join("<li>") + "</ul>";
+		content.innerHTML = "<ul><li>"+ origins.join("<li>") + "</ul>";
 		document.getElementById("Ocontainer").style.display = "block";
 	}
 
@@ -189,13 +179,35 @@ async function MuCParser() {
 				return "";
 			}).join(" ");
 		}
-		content.innerHTML = "This system's worlds include:<ul><li>"+ worlds.join("<li>") + "</ul>";
+		content.innerHTML = "<ul><li>"+ worlds.join("<li>") + "</ul>";
 		document.getElementById("Wcontainer").style.display = "block";
 	}
-
 	function parseCoconsciousness( tagString ){
 		let content = document.getElementById("Cccontent");
 		content.innerHTML = Utils.getOption(Utils.getFormat("Cc"), tagString);
 		document.getElementById("Cccontainer").style.display = "block";
 	}
+
+
+
+	function parseNumbers(tagString) {
+		let content = document.getElementById( "Icontent" );
+		let format = Utils.getFormat("I");
+		let cleanString = tagString.replace(/[#^]/g,'').replace(/".*"/g,'');
+		content.innerHTML = Utils.getOption(format, cleanString);
+		if( tagString.includes( "#" ) ) {
+			content.innerHTML += "<br>" + Utils.getMod(format, "#");
+		}
+		if( tagString.includes( "^" ) ) {
+			content.innerHTML += "<br>" + Utils.getMod(format, "^");
+		}
+		if( tagString.includes( '"' ) ) {
+			content.innerHTML += "<br>(" + tagString.match(/".*"/)[0].replace(/"/g,"");
+			content.innerHTML += ")";
+		}
+		document.getElementById("Icontainer").style.display = "block";
+	}
+
+
+
 }
