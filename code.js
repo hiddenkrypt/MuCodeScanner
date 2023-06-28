@@ -27,6 +27,7 @@ async function MuCParser() {
 		}
 		for(let i=0; i< code.length; i++){
 			let e = code[i];
+			console.log("parse: "+e)
 			//MuC N---! [f] S.H A(b---! r---!) Os We Cc-- I--- OF--- Ppsi Ff T+++ Xg(g) Jpa Dv R--- C--- S---! MF---
 			if( e.substr(0,1) == "N" ) {
 				parseNumbers( e.substr(1) );
@@ -52,6 +53,7 @@ async function MuCParser() {
 	}
 
 	function parseNumbers(tagString) {
+		console.log("parse number:"+tagString)
 		let content = document.getElementById( "Ncontent" );
 		let format = Utils.getFormat("N");
 		let cleanString = tagString.replace(/[#^]/g,'').replace(/".*"/g,'');
@@ -190,7 +192,7 @@ async function MuCParser() {
 
 
 
-	function parseNumbers(tagString) {
+	function parseIntegration(tagString) {
 		let content = document.getElementById( "Icontent" );
 		let format = Utils.getFormat("I");
 		let cleanString = tagString.replace(/[#^]/g,'').replace(/".*"/g,'');
