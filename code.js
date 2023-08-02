@@ -1,6 +1,6 @@
 
 
-
+//MuC N- [f] S.H+/Hf+/Uz&Uv/Sa/Sg+/Sh/Rg A(b+ r---!/++) Os/c Wm+ Cc- OF- Pspi!/pre Fxb/s/pc^/a T+ Jm Dg R(--/+) C+++ S--
 window.onload = MuCParser;
 
 async function MuCParser() {
@@ -15,48 +15,50 @@ async function MuCParser() {
 
 	function parseCode() {
 		Utils.reset();
-		let code = input.value.split("\"").map ((e,i)=>{
+
+		//find token comments (pairs of quotes) and replace inner spaces with tabs
+		let code = input.value.split("\"").map((e,i)=>{
 			if( i%2 != 0 ) {
 				return '"'+e.replace(/ /g,"\t")+'"';
 			}
 			return e;
-		}).join("").split(" ");
+		}).join("");
+
+		//Find the age tab and replace the space in it's groups
+		let decode = code.match(/^(?<first>.*)(?<ages>A\(.*?\))(?<last>.*)$/);
+		code = decode.groups.first + decode.groups.ages.replace(/ /g,"\t") + decode.groups.last;
+
+		//now we can split on spaces, since we've dealt with the non-delineating space chars
+		code = code.split(" ");
 		if( code[0] != "MuC" ) {
 			Utils.error("This does not appear to be a MuC Code");
 			return
 		}
-		for(let i=0; i< code.length; i++){
-			let e = code[i];
-			console.log("parse: "+e)
-			//MuC N---! [f] S.H A(b---! r---!) Os We Cc-- I--- OF--- Ppsi Ff T+++ Xg(g) Jpa Dv R--- C--- S---! MF---
-			if( e.substr(0,1) == "N" ) {
-				parseNumbers( e.substr(1) );
-			} else if( e.substr(0,1) == "[") {
-				parseGenders( e.replace(/[\[\]]/g, "") );
-			} else if( e.substr(0,2) == "S.") {
-				parseSpecies( e.substr(2) );
-			} else if( e.substr(0,1) == "A") {
-				parseAge( (e+"|"+code[i+1]).substr(1).replace(/[\(\)]/g, "") );
-				i++;
-			} else if( e.substr(0,1) == "O" && e.substr(0,2) != "OF") {
-				parseOrigins( e.substr(1) );
-			} else if( e.substr(0,1) == "W" ) {
-				parseWorlds( e.substr(1) );
-			} else if( e.substr(0,2) == "Cc" ) {
-				parseCoconsciousness( e.substr(2) );
-			} else if( e.substr(0,1) == "I" ) {
-				parseIntegration( e.substr(1) );
-			} else {
-				//Utils.error("Unknown or unimplemented tag: "+e);
+		var parseTags = [
+			{match:/^N/, parser:parseNumbers},
+			{match:/^\[/, parser:parseGenders},
+			{match:/^S\./, parser:parseSpecies},
+			{match:/^A\(/, parser:parseAge},
+			{match:/^O[^F]/, parser:parseOrigins},
+			{match:/^W/, parser:parseWorlds},
+			{match:/^Cc/, parser:parseCoconsciousness},
+			{match:/^I/, parser:parseIntegration}
+			//{match:/^OF/, parser:parseOutnessFactor, cleanup: e=> e.substr(2)},
+			//{match:/^/, parser:}
+		];
+		code.forEach( segment=>{
+			if(segment == "MuC"){ return; }
+			let tagHandler = parseTags.find(e=>e.match.test(segment))
+			if( tagHandler ){
+				tagHandler.parser(segment);
 			}
-		}
+		});
 	}
 
 	function parseNumbers(tagString) {
-		console.log("parse number:"+tagString)
 		let content = document.getElementById( "Ncontent" );
 		let format = Utils.getFormat("N");
-		let cleanString = tagString.replace(/[#^]/g,'').replace(/".*"/g,'');
+		let cleanString = tagString.substr(1).replace(/[#^]/g,'').replace(/".*"/g,'');
 		content.innerHTML = Utils.getOption(format, cleanString);
 		if( tagString.includes( "#" ) ) {
 			content.innerHTML += "<br>" + Utils.getMod(format, "#");
@@ -74,22 +76,21 @@ async function MuCParser() {
 	function parseGenders( tagString ) {
 		let content = document.getElementById("[content");
 		let format = Utils.getFormat("[");
+		let cleanString = tagString.replace(/[\[\]]/g, "")
 		function getGender(gender){
 			return Utils.getOption( format, gender );
 		}
-		let firstGenderTag = tagString.split(";")[0];
+		let firstGenderTag = cleanString.split(";")[0];
 		let firstGender = getGender( firstGenderTag );
 		content.innerHTML = "This system idenfies their body as " + firstGender + "<hr>";
-		if(!tagString.split(";")[1]){
+		if(!cleanString.split(";")[1]){
 			return;
 		}
-		let remainingGenderTags = tagString.split(";")[1].split("/");
+		let remainingGenderTags = cleanString.split(";")[1].split("/");
 		content.innerHTML += "Members of this system are:<ul><li>" + remainingGenderTags.map(getGender).join("<li>") + "</ul>";
 
 		document.getElementById("[container").style.display = "block";
 	}
-
-
 
 	function parseSpecies( tagString ) {
 		let content = document.getElementById("S.content");
@@ -121,20 +122,18 @@ async function MuCParser() {
 			}
 			return Utils.getOption( format, speciesTag );
 		}
-		let allSpecies = tagString.split("/").map(getSpecies);
+		let allSpecies = tagString.substr(2).split("/").map(getSpecies);
 		content.innerHTML = "<ul><li>"+ allSpecies.join("<li>") + "</ul>";
 		document.getElementById("S.container").style.display = "block";
 	}
 
-
-
-	function parseAge( ageString ){
+	function parseAge( tagString ){
 		let content = document.getElementById("Acontent");
 		let format = Utils.getFormat("A");
-		let bodyTag = ageString.split("|")[0].substr(1);
+		let ageString = tagString.substr(1).replace(/[\(\)]/g, "");
+		let bodyTag = ageString.split("\t")[0].substr(1);
 		content.innerHTML = "The body of this sytem is this old: '" + Utils.getOption( format, bodyTag ) + "'<hr>";
-
-		let systemRangeTags = ageString.substr(ageString.indexOf("|r")+2).split("/");
+		let systemRangeTags = ageString.substr(ageString.indexOf("\tr")+2).split("/");
 		if(systemRangeTags.length != 0 ){
 			if(systemRangeTags.length == 2){
 				content.innerHTML += "<br><br>System members range in age from '" + Utils.getOption( format, systemRangeTags[0] ) + "' to '" +  Utils.getOption( format, systemRangeTags[1] ) + "'";
@@ -142,23 +141,23 @@ async function MuCParser() {
 				content.innerHTML += "<br>This system's members include the ages of " + systemRangeTags.map(e=> "'" + Utils.getOption( format, e ) + "'" ).join();
 			}
 		}
-
 		document.getElementById("Acontainer").style.display = "block";
 	}
 
-	function parseOrigins( originString ){
+	function parseOrigins( tagString ){
 		let content = document.getElementById("Ocontent");
 		let format = Utils.getFormat("O");
+		let originString = tagString.substr(1)
 		let origins = originString.split("/").map(e=> Utils.getOption( format, e ));
 		content.innerHTML = "<ul><li>"+ origins.join("<li>") + "</ul>";
 		document.getElementById("Ocontainer").style.display = "block";
 	}
 
 
-	function parseWorlds( worldString ){
+	function parseWorlds( tagString ){
 		let content = document.getElementById("Wcontent");
 		let format = Utils.getFormat("W");
-		let worlds = worldString.split("/").map(parseWorldTag);
+		let worlds = tagString.substr(1).split("/").map(parseWorldTag);
 		function parseWorldTag( tag ){
 			if (!tag || tag == ""){
 				return "";
@@ -186,7 +185,7 @@ async function MuCParser() {
 	}
 	function parseCoconsciousness( tagString ){
 		let content = document.getElementById("Cccontent");
-		content.innerHTML = Utils.getOption(Utils.getFormat("Cc"), tagString);
+		content.innerHTML = Utils.getOption(Utils.getFormat("Cc"), tagString.substr(2));
 		document.getElementById("Cccontainer").style.display = "block";
 	}
 
@@ -195,7 +194,7 @@ async function MuCParser() {
 	function parseIntegration(tagString) {
 		let content = document.getElementById( "Icontent" );
 		let format = Utils.getFormat("I");
-		let cleanString = tagString.replace(/[#^]/g,'').replace(/".*"/g,'');
+		let cleanString = tagString.substr(1).replace(/[#^]/g,'').replace(/".*"/g,'');
 		content.innerHTML = Utils.getOption(format, cleanString);
 		if( tagString.includes( "#" ) ) {
 			content.innerHTML += "<br>" + Utils.getMod(format, "#");
