@@ -42,8 +42,8 @@ async function MuCParser() {
 			{match:/^O[^F]/, parser:parseOrigins},
 			{match:/^W/, parser:parseWorlds},
 			{match:/^Cc/, parser:parseCoconsciousness},
-			{match:/^I/, parser:parseIntegration}
-			//{match:/^OF/, parser:parseOutnessFactor, cleanup: e=> e.substr(2)},
+			{match:/^I/, parser:parseIntegration},
+			{match:/^OF/, parser:parseOutnessFactor}
 			//{match:/^/, parser:}
 		];
 		code.forEach( segment=>{
@@ -136,9 +136,9 @@ async function MuCParser() {
 		let systemRangeTags = ageString.substr(ageString.indexOf("\tr")+2).split("/");
 		if(systemRangeTags.length != 0 ){
 			if(systemRangeTags.length == 2){
-				content.innerHTML += "<br><br>System members range in age from '" + Utils.getOption( format, systemRangeTags[0] ) + "' to '" +  Utils.getOption( format, systemRangeTags[1] ) + "'";
+				content.innerHTML += "System members range in age from '" + Utils.getOption( format, systemRangeTags[0] ) + "' to '" +  Utils.getOption( format, systemRangeTags[1] ) + "'";
 			} else {
-				content.innerHTML += "<br>This system's members include the ages of " + systemRangeTags.map(e=> "'" + Utils.getOption( format, e ) + "'" ).join();
+				content.innerHTML += "This system's members include the ages of " + systemRangeTags.map(e=> "'" + Utils.getOption( format, e ) + "'" ).join();
 			}
 		}
 		document.getElementById("Acontainer").style.display = "block";
@@ -152,7 +152,6 @@ async function MuCParser() {
 		content.innerHTML = "<ul><li>"+ origins.join("<li>") + "</ul>";
 		document.getElementById("Ocontainer").style.display = "block";
 	}
-
 
 	function parseWorlds( tagString ){
 		let content = document.getElementById("Wcontent");
@@ -183,13 +182,12 @@ async function MuCParser() {
 		content.innerHTML = "<ul><li>"+ worlds.join("<li>") + "</ul>";
 		document.getElementById("Wcontainer").style.display = "block";
 	}
+
 	function parseCoconsciousness( tagString ){
 		let content = document.getElementById("Cccontent");
 		content.innerHTML = Utils.getOption(Utils.getFormat("Cc"), tagString.substr(2));
 		document.getElementById("Cccontainer").style.display = "block";
 	}
-
-
 
 	function parseIntegration(tagString) {
 		let content = document.getElementById( "Icontent" );
@@ -209,6 +207,11 @@ async function MuCParser() {
 		document.getElementById("Icontainer").style.display = "block";
 	}
 
-
+	function parseOutnessFactor(tagString){
+		let content = document.getElementById( "OFcontent" );
+		let format = Utils.getFormat("OF");
+		content.innerHTML = Utils.getOption(format, tagString.substr(2));
+		document.getElementById("OFcontainer").style.display = "block";
+	}
 
 }
