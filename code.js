@@ -35,29 +35,31 @@ async function MuCParser() {
 			return
 		}
 		var parseTags = [
-			{match:/^N/, parser:parseNumbers},
-			{match:/^\[/, parser:parseGenders},
-			{match:/^S\./, parser:parseSpecies},
-			{match:/^A\(/, parser:parseAge},
-			{match:/^O[^F]/, parser:parseOrigins},
-			{match:/^W/, parser:parseWorlds},
-			{match:/^Cc/, parser:parseCoconsciousness},
-			{match:/^I/, parser:parseIntegration},
-			{match:/^OF/, parser:parseOutnessFactor}
-			//{match:/^/, parser:}
+			{formatTag:"N", match:/^N/, parser:parseNumbers},
+			{formatTag:"[", match:/^\[/, parser:parseGenders},
+			{formatTag:"S.", match:/^S\./, parser:parseSpecies},
+			{formatTag:"A", match:/^A\(/, parser:parseAge},
+			{formatTag:"O", match:/^O[^F]/, parser:parseOrigins},
+			{formatTag:"W", match:/^W/, parser:parseWorlds},
+			{formatTag:"Cc", match:/^Cc/, parser:parseCoconsciousness},
+			{formatTag:"I", match:/^I/, parser:parseIntegration},
+			{formatTag:"OF", match:/^OF/, parser:parseOutnessFactor},
+			{formatTag:"N", match:/^/, parser:()=>{}}
 		];
 		code.forEach( segment=>{
 			if(segment == "MuC"){ return; }
 			let tagHandler = parseTags.find(e=>e.match.test(segment))
 			if( tagHandler ){
-				tagHandler.parser(segment);
+				let content = document.getElementById(tagHandler.formatTag+"content");
+				let format = Utils.getFormat(tagHandler.formatTag);
+				let container = document.getElementById(tagHandler.formatTag+"container");
+				tagHandler.parser(segment, content, format);
+				container.style.display = "block";
 			}
 		});
 	}
 
-	function parseNumbers(tagString) {
-		let content = document.getElementById( "Ncontent" );
-		let format = Utils.getFormat("N");
+	function parseNumbers( tagString, content, format ) {
 		let cleanString = tagString.substr(1).replace(/[#^]/g,'').replace(/".*"/g,'');
 		content.innerHTML = Utils.getOption(format, cleanString);
 		if( tagString.includes( "#" ) ) {
@@ -70,12 +72,10 @@ async function MuCParser() {
 			content.innerHTML += "<br>(" + tagString.match(/".*"/)[0].replace(/"/g,"");
 			content.innerHTML += ")";
 		}
-		document.getElementById("Ncontainer").style.display = "block";
+
 	}
 
-	function parseGenders( tagString ) {
-		let content = document.getElementById("[content");
-		let format = Utils.getFormat("[");
+	function parseGenders( tagString, content, format ) {
 		let cleanString = tagString.replace(/[\[\]]/g, "")
 		function getGender(gender){
 			return Utils.getOption( format, gender );
@@ -89,12 +89,10 @@ async function MuCParser() {
 		let remainingGenderTags = cleanString.split(";")[1].split("/");
 		content.innerHTML += "Members of this system are:<ul><li>" + remainingGenderTags.map(getGender).join("<li>") + "</ul>";
 
-		document.getElementById("[container").style.display = "block";
+
 	}
 
-	function parseSpecies( tagString ) {
-		let content = document.getElementById("S.content");
-		let format = Utils.getFormat("S.");
+	function parseSpecies( tagString, content, format ) {
 		function getSpecies( speciesTag ) {
 			if( speciesTag.includes( "+" ) ) {
 				return Utils.getMod( format, "+" ) + getSpecies( speciesTag.replace(/\+/g, "")  );
@@ -124,12 +122,10 @@ async function MuCParser() {
 		}
 		let allSpecies = tagString.substr(2).split("/").map(getSpecies);
 		content.innerHTML = "<ul><li>"+ allSpecies.join("<li>") + "</ul>";
-		document.getElementById("S.container").style.display = "block";
+
 	}
 
-	function parseAge( tagString ){
-		let content = document.getElementById("Acontent");
-		let format = Utils.getFormat("A");
+	function parseAge( tagString, content, format ){
 		let ageString = tagString.substr(1).replace(/[\(\)]/g, "");
 		let bodyTag = ageString.split("\t")[0].substr(1);
 		content.innerHTML = "The body of this sytem is this old: '" + Utils.getOption( format, bodyTag ) + "'<hr>";
@@ -141,21 +137,19 @@ async function MuCParser() {
 				content.innerHTML += "This system's members include the ages of " + systemRangeTags.map(e=> "'" + Utils.getOption( format, e ) + "'" ).join();
 			}
 		}
-		document.getElementById("Acontainer").style.display = "block";
+
 	}
 
-	function parseOrigins( tagString ){
-		let content = document.getElementById("Ocontent");
-		let format = Utils.getFormat("O");
+	function parseOrigins( tagString, content, format ){
 		let originString = tagString.substr(1)
 		let origins = originString.split("/").map(e=> Utils.getOption( format, e ));
 		content.innerHTML = "<ul><li>"+ origins.join("<li>") + "</ul>";
-		document.getElementById("Ocontainer").style.display = "block";
+
 	}
 
-	function parseWorlds( tagString ){
-		let content = document.getElementById("Wcontent");
-		let format = Utils.getFormat("W");
+	function parseWorlds( tagString, content, format ){
+		content = document.getElementById("Wcontent");
+		format = Utils.getFormat("W");
 		let worlds = tagString.substr(1).split("/").map(parseWorldTag);
 		function parseWorldTag( tag ){
 			if (!tag || tag == ""){
@@ -180,18 +174,15 @@ async function MuCParser() {
 			}).join(" ");
 		}
 		content.innerHTML = "<ul><li>"+ worlds.join("<li>") + "</ul>";
-		document.getElementById("Wcontainer").style.display = "block";
+
 	}
 
-	function parseCoconsciousness( tagString ){
-		let content = document.getElementById("Cccontent");
-		content.innerHTML = Utils.getOption(Utils.getFormat("Cc"), tagString.substr(2));
-		document.getElementById("Cccontainer").style.display = "block";
+	function parseCoconsciousness( tagString, content, format ){
+		content.innerHTML = Utils.getOption( format, tagString.substr(2));
+
 	}
 
-	function parseIntegration(tagString) {
-		let content = document.getElementById( "Icontent" );
-		let format = Utils.getFormat("I");
+	function parseIntegration( tagString, content, format ) {
 		let cleanString = tagString.substr(1).replace(/[#^]/g,'').replace(/".*"/g,'');
 		content.innerHTML = Utils.getOption(format, cleanString);
 		if( tagString.includes( "#" ) ) {
@@ -204,14 +195,12 @@ async function MuCParser() {
 			content.innerHTML += "<br>(" + tagString.match(/".*"/)[0].replace(/"/g,"");
 			content.innerHTML += ")";
 		}
-		document.getElementById("Icontainer").style.display = "block";
+
 	}
 
-	function parseOutnessFactor(tagString){
-		let content = document.getElementById( "OFcontent" );
-		let format = Utils.getFormat("OF");
+	function parseOutnessFactor( tagString, content, format ){
 		content.innerHTML = Utils.getOption(format, tagString.substr(2));
-		document.getElementById("OFcontainer").style.display = "block";
+
 	}
 
 }
