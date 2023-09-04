@@ -17,7 +17,7 @@ async function MuCParser() {
 		Utils.reset();
 
 		//find token comments (pairs of quotes) and replace inner spaces with tabs
-		let code = input.value.split("\"").map((e,i)=>{
+		let code = input.value.trim().split("\"").map((e,i)=>{
 			if( i%2 != 0 ) {
 				return '"'+e.replace(/ /g,"\t")+'"';
 			}
@@ -44,7 +44,16 @@ async function MuCParser() {
 			{formatTag:"Cc", match:/^Cc/, parser:parseCoconsciousness},
 			{formatTag:"I", match:/^I/, parser:parseIntegration},
 			{formatTag:"OF", match:/^OF/, parser:parseOutnessFactor},
-			{formatTag:"N", match:/^/, parser:()=>{}}
+			{formatTag:"P", match:/^P/, parser:()=>{}},
+			{formatTag:"F", match:/^F/, parser:()=>{}},
+			{formatTag:"T", match:/^T/, parser:()=>{}},
+			{formatTag:"X", match:/^X/, parser:()=>{}},
+			{formatTag:"J", match:/^J/, parser:()=>{}},
+			{formatTag:"D", match:/^D/, parser:basicParser},
+			{formatTag:"R", match:/^R/, parser:basicParser},
+			{formatTag:"C", match:/^C/, parser:basicParser},
+			{formatTag:"So", match:/^So/, parser:basicParser},
+			{formatTag:"MF", match:/^MF/, parser:basicParser}
 		];
 		code.forEach( segment=>{
 			if(segment == "MuC"){ return; }
@@ -58,6 +67,13 @@ async function MuCParser() {
 			}
 		});
 	}
+
+
+	function basicParser( tagString, content, format ){
+		//console.log(tagString);
+		content.innerHTML = Utils.getOption( format, tagString.substr(format.format.length));
+	}
+
 
 	function parseNumbers( tagString, content, format ) {
 		let cleanString = tagString.substr(1).replace(/[#^]/g,'').replace(/".*"/g,'');
@@ -179,7 +195,6 @@ async function MuCParser() {
 
 	function parseCoconsciousness( tagString, content, format ){
 		content.innerHTML = Utils.getOption( format, tagString.substr(2));
-
 	}
 
 	function parseIntegration( tagString, content, format ) {
